@@ -40,6 +40,1615 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 .tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
 .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px 10px; cursor: pointer; font-size: 10px; color: var(--text3); gap: 3px; border: none; background: none; }
 .tab-item.active { color: var(--accent); }
+.tab-icon { font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.tab-icon svg { width: 24px; height: 24px; }
+
+/* タブコンテンツ */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ヘッダー */
+.page-header { padding: 20px 16px 12px; }
+.page-header h1 { font-size: 22px; font-weight: 600; }
+.page-header p { font-size: 13px; color: var(--text2); margin-top: 2px; }
+
+/* メトリクスグリッド */
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 16px 16px; }
+.metric-card { background: var(--card); border-radius: var(--radius-sm); padding: 14px; border: 1px solid var(--border); }
+.metric-label { font-size: 11px; color: var(--text2); margin-bottom: 4px; }
+.metric-value { font-size: 22px; font-weight: 600; }
+.metric-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.metric-good { color: var(--green); }
+.metric-warn { color: var(--amber); }
+
+/* 進捗バー */
+.progress-section { padding: 0 16px 16px; }
+.progress-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; }
+.progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.progress-title { font-size: 14px; font-weight: 500; }
+.progress-pct { font-size: 13px; color: var(--accent); font-weight: 600; }
+.progress-bar { background: #e8e8e8; border-radius: 6px; height: 8px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 6px; background: var(--accent); transition: width 0.3s; }
+.progress-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; color: var(--text3); }
+
+/* セクション */
+.section { padding: 0 16px 16px; }
+.section-title { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+
+/* 食事カード */
+.meal-card { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.meal-name { font-size: 14px; font-weight: 500; }
+.meal-detail { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.meal-kcal { font-size: 15px; font-weight: 600; color: var(--accent); }
+
+/* サプリカード */
+.supple-card { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+.supple-name { font-size: 14px; font-weight: 500; }
+.supple-time { font-size: 12px; color: var(--text2); margin-top: 2px; }
+.toggle { width: 44px; height: 24px; background: #e0e0e0; border-radius: 12px; position: relative; cursor: pointer; transition: background 0.2s; border: none; }
+.toggle.on { background: var(--accent); }
+.toggle::after { content: ''; width: 18px; height: 18px; background: #fff; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.toggle.on::after { left: 23px; }
+
+/* ToDoリスト */
+.todo-item { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+.todo-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.todo-check.checked { background: var(--accent); border-color: var(--accent); color: #fff; }
+.todo-text { font-size: 14px; }
+.todo-text.done { text-decoration: line-through; color: var(--text3); }
+.todo-category { font-size: 11px; margin-top: 2px; }
+
+/* 運動タブ */
+.day-selector { display: flex; overflow-x: auto; gap: 8px; padding: 0 16px 16px; scrollbar-width: none; }
+.day-selector::-webkit-scrollbar { display: none; }
+.day-btn { flex-shrink: 0; padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--card); font-size: 13px; cursor: pointer; white-space: nowrap; }
+.day-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.workout-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin: 0 16px 12px; }
+.workout-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.workout-sub { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
+.workout-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 500; margin-bottom: 12px; }
+.badge-run { background: var(--blue-bg); color: var(--blue); }
+.badge-strength { background: var(--amber-bg); color: var(--amber); }
+.badge-rest { background: #f0f0f0; color: var(--text2); }
+.badge-combo { background: #e8f5e1; color: var(--green); }
+
+.exercise-list { border-top: 1px solid var(--border); padding-top: 12px; }
+.exercise-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.exercise-item:last-child { border-bottom: none; }
+.exercise-name { font-size: 14px; }
+.exercise-detail { font-size: 12px; color: var(--text2); }
+
+/* 心拍ゾーン */
+.zone-table { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); margin: 0 16px 12px; overflow: hidden; }
+.zone-row { display: flex; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; align-items: center; }
+.zone-row:last-child { border-bottom: none; }
+.zone-name { font-weight: 500; }
+.zone-bpm { color: var(--text2); }
+
+/* 食事タブ */
+.nutrition-table { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); margin: 0 16px 12px; overflow: hidden; }
+.nutrition-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.nutrition-row:last-child { border-bottom: none; }
+.nutrition-name { color: var(--text2); }
+.nutrition-value { font-weight: 500; }
+.nutrition-status { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+.status-ok { background: var(--green-bg); color: var(--green); }
+
+.meal-detail-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); margin: 0 16px 12px; overflow: hidden; }
+.meal-detail-header { padding: 12px 14px; background: var(--bg); border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--text2); }
+.meal-detail-item { display: flex; justify-content: space-between; padding: 9px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.meal-detail-item:last-child { border-bottom: none; }
+.meal-detail-name { color: var(--text); }
+.meal-detail-kcal { color: var(--accent); font-weight: 500; }
+
+/* 体重タブ */
+.weight-input-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin: 0 16px 16px; }
+.weight-input-row { display: flex; gap: 10px; align-items: center; }
+.weight-input { flex: 1; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 16px; background: var(--bg); }
+.weight-btn { padding: 10px 20px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; }
+.weight-date { font-size: 13px; color: var(--text2); margin-bottom: 10px; }
+
+.weight-history { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); margin: 0 16px 12px; overflow: hidden; }
+.weight-history-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.weight-history-item:last-child { border-bottom: none; }
+.weight-date-col { color: var(--text2); }
+.weight-value-col { font-weight: 600; font-size: 15px; }
+.weight-diff { font-size: 11px; }
+.weight-diff.down { color: var(--green); }
+.weight-diff.up { color: var(--red); }
+
+.goal-progress-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin: 0 16px 12px; }
+.goal-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+.goal-label { color: var(--text2); }
+.goal-value { font-weight: 500; }
+
+/* チャートエリア */
+.chart-container { margin: 0 16px 12px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; }
+.chart-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 12px; }
+canvas { width: 100% !important; }
+
+/* 栄養バー */
+.nutrient-bars { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin: 0 16px 12px; }
+.nutrient-row { margin-bottom: 12px; }
+.nutrient-row:last-child { margin-bottom: 0; }
+.nutrient-header { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+.nutrient-name { color: var(--text); }
+.nutrient-val { color: var(--text2); }
+.nutrient-bar { background: #e8e8e8; border-radius: 4px; height: 6px; }
+.nutrient-fill { height: 100%; border-radius: 4px; }
+
+/* 運動タブ：日付セレクタ（曜日固定をやめ、日付ベースに） */
+.day-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 13px 9px; position: relative; }
+.day-btn-dow { font-size: 12px; font-weight: 500; }
+.day-btn-date { font-size: 10px; opacity: 0.75; }
+.day-btn.day-today:not(.active) { border-color: var(--accent); color: var(--accent); }
+.day-btn-dot { position: absolute; top: 5px; right: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.day-btn.active .day-btn-dot { background: #fff; }
+
+.workout-empty { text-align: center; color: var(--text3); padding: 28px 16px; }
+.workout-empty-text { font-size: 13px; line-height: 1.7; }
+.workout-delete-btn { text-align: right; font-size: 12px; color: var(--red); margin-top: 10px; cursor: pointer; }
+
+/* メニュー選択カード */
+.menu-option { display: flex; justify-content: space-between; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; margin: 0 16px 8px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+.menu-option.selected { border-color: var(--accent); background: var(--green-bg); }
+.menu-option-sub { font-size: 12px; color: var(--text2); margin-top: 5px; }
+.menu-option-ref { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.menu-option-check { color: var(--accent); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+
+/* 効果評価カード */
+.eval-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px 16px; margin: 0 16px 16px; border-left: 4px solid var(--text3); }
+.eval-label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
+.eval-text { font-size: 13px; line-height: 1.7; }
+.eval-good { border-left-color: var(--green); }
+.eval-warn { border-left-color: var(--amber); }
+.eval-low { border-left-color: var(--red); }
+.eval-empty { border-left-color: var(--text3); color: var(--text2); }
+
+/* 週間レビュータブ */
+.week-nav { display: flex; gap: 8px; padding: 0 16px 16px; }
+.week-nav-btn { flex: 1; padding: 10px 6px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--card); font-size: 12px; cursor: pointer; text-align: center; color: var(--text); }
+.week-nav-btn.current { background: var(--accent); color: #fff; border-color: var(--accent); }
+.week-nav-btn.disabled { opacity: 0.4; pointer-events: none; }
+.review-chip { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; background: var(--bg); border: 1px solid var(--border); color: var(--text2); }
+
+/* 食事タブ：スポット変更UI */
+.meal-override-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px 4px; }
+.meal-override-label { font-size: 12px; color: var(--text2); }
+.meal-override-toggle { font-size: 12px; color: var(--accent); cursor: pointer; font-weight: 600; }
+.meal-edit-form { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0 16px 10px; padding: 14px; }
+.meal-edit-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.meal-edit-label { font-size: 12px; color: var(--text2); min-width: 36px; }
+.meal-edit-name { flex: 1; padding: 7px 10px; border-radius: 6px; border: 1px solid var(--border); font-size: 13px; background: var(--bg); color: var(--text); }
+.meal-edit-kcal { width: 70px; padding: 7px 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 13px; background: var(--bg); color: var(--text); text-align: right; }
+.meal-edit-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.meal-edit-save { padding: 8px 18px; border-radius: 6px; background: var(--accent); color: #fff; border: none; font-size: 13px; font-weight: 600; cursor: pointer; }
+.meal-edit-clear { padding: 8px 14px; border-radius: 6px; background: var(--bg); color: var(--red); border: 1px solid var(--border); font-size: 13px; cursor: pointer; }
+.meal-search-btn { padding: 8px 14px; border-radius: 6px; background: var(--bg); color: var(--accent); border: 1px solid var(--accent); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+.meal-search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.meal-search-btn .spin { display: inline-block; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.ai-badge { display: inline-block; font-size: 10px; background: #6366f1; color: #fff; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.search-result-note { font-size: 11px; color: var(--text3); margin-top: 6px; line-height: 1.6; }
+.search-error-note { font-size: 11px; color: var(--red); margin-top: 6px; }
+.meal-card-modified { border-left: 3px solid var(--amber); }
+.meal-badge-mod { font-size: 10px; background: var(--amber); color: #fff; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.meal-card-default-kcal { color: var(--text3); text-decoration: line-through; font-size: 12px; margin-right: 4px; }
+/* 今日タブ：摂取カロリーなどをdynamic表示 */
+.metric-value.metric-warn { color: var(--amber); }
+.metric-value.metric-low  { color: var(--red); }
+.metric-value.metric-pending { color: var(--text3); font-size: 18px; }
+.metric-card.pending { opacity: 0.5; }
+.today-exercise-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 16px; margin: 0 16px 8px; display: flex; justify-content: space-between; align-items: center; }
+.today-exercise-card.has-record { border-left: 3px solid var(--accent); }
+.today-exercise-card.no-record  { border-left: 3px solid var(--text3); opacity: 0.6; }
+.today-exercise-name { font-size: 14px; font-weight: 500; }
+.today-exercise-sub  { font-size: 12px; color: var(--text2); margin-top: 3px; }
+.today-exercise-kcal { font-size: 13px; font-weight: 600; color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== 今日タブ ===== -->
+  <div class="tab-content active" id="tab-today">
+    <div class="page-header">
+      <h1>今日の記録</h1>
+      <p id="today-date">2025年6月19日（木）</p>
+    </div>
+
+    <div class="metrics" id="today-metrics">
+      <div class="metric-card">
+        <div class="metric-label">摂取カロリー</div>
+        <div class="metric-value metric-good" id="today-kcal">−</div>
+        <div class="metric-sub">目標 2,000〜2,200 kcal</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">たんぱく質</div>
+        <div class="metric-value metric-good" id="today-protein">−</div>
+        <div class="metric-sub" id="today-protein-sub">目標 110〜130g</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">脂質</div>
+        <div class="metric-value metric-good" id="today-fat">−</div>
+        <div class="metric-sub" id="today-fat-sub">目標 60〜70g</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">炭水化物</div>
+        <div class="metric-value metric-good" id="today-carb">−</div>
+        <div class="metric-sub" id="today-carb-sub">目標 260〜300g</div>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-card">
+        <div class="progress-header">
+          <span class="progress-title">⚖️ 減量進捗</span>
+          <span class="progress-pct" id="weight-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="weight-bar" style="width:0%"></div>
+        </div>
+        <div class="progress-labels">
+          <span>現在 <span id="current-weight-label">73.0</span>kg</span>
+          <span>目標 65.0kg</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">食事記録</div>
+    </div>
+    <div id="today-meal-cards"></div>
+
+    <div class="section">
+      <div class="section-title">運動記録</div>
+    </div>
+    <div id="today-exercise-card"></div>
+
+    <div class="section">
+      <div class="section-title">サプリメント</div>
+      <div class="supple-card">
+        <div>
+          <div class="supple-name">DHC ビタミンD</div>
+          <div class="supple-time">朝食と一緒に 1粒</div>
+        </div>
+        <button class="toggle" onclick="this.classList.toggle('on')" id="supple1"></button>
+      </div>
+      <div class="supple-card">
+        <div>
+          <div class="supple-name">DHC 鉄＋葉酸＋亜鉛グミ</div>
+          <div class="supple-time">昼食後 2粒</div>
+        </div>
+        <button class="toggle" onclick="this.classList.toggle('on')" id="supple2"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ToDoタブ ===== -->
+  <div class="tab-content" id="tab-todo">
+    <div class="page-header">
+      <h1>今日のToDo</h1>
+      <p id="todo-progress-text">0 / 0 完了</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🍽️ 食事</div>
+      <div class="todo-item" data-todo-id="meal-breakfast" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">朝食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="meal-lunch" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">昼食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="meal-snack" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">間食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="meal-dinner" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">夕食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">💊 サプリ</div>
+      <div class="todo-item" data-todo-id="supple-vitd" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">DHC ビタミンD（朝食と一緒）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="supple-iron" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">DHC 鉄＋葉酸＋亜鉛グミ（昼食後）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🏃 運動・健康</div>
+      <div class="todo-item" data-todo-id="exercise-today" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">今日の運動を実施する</div><div class="todo-category" style="color:var(--amber)">運動</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="health-water" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">水分補給（水1L・麦茶1L）</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="health-weight" onclick="toggleTodo(this)">
+        <div class="todo-check">✓</div>
+        <div><div class="todo-text">体重を記録する</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 運動タブ ===== -->
+  <div class="tab-content" id="tab-exercise">
+    <div class="page-header">
+      <h1>運動プログラム</h1>
+      <p>日付を選んで、行った運動を記録</p>
+    </div>
+
+    <div class="section"><div class="section-title">記録する日</div></div>
+    <div class="day-selector" id="day-selector"></div>
+
+    <div id="workout-display"></div>
+
+    <div class="section"><div class="section-title">この日のメニューを選ぶ</div></div>
+    <div id="menu-picker"></div>
+
+    <div class="section"><div class="section-title">📅 今週のまとめ</div></div>
+    <div id="week-summary"></div>
+
+    <div class="section">
+      <div class="section-title">🫀 心拍ゾーン（最大心拍数 193bpm）</div>
+    </div>
+    <div class="zone-table">
+      <div class="zone-row"><span class="zone-name">LSD（軽め）</span><span class="zone-bpm">116〜135 bpm</span></div>
+      <div class="zone-row"><span class="zone-name">テンポ走</span><span class="zone-bpm">135〜154 bpm</span></div>
+      <div class="zone-row"><span class="zone-name">インターバル</span><span class="zone-bpm">164〜174 bpm</span></div>
+    </div>
+  </div>
+
+  <!-- ===== 食事タブ ===== -->
+  <div class="tab-content" id="tab-meal">
+    <div class="page-header">
+      <h1>食事プラン</h1>
+      <p id="meal-tab-subtitle">1日合計 − kcal</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">栄養素サマリー</div>
+    </div>
+    <div class="nutrient-bars" id="nutrient-bars-dynamic"></div>
+
+    <div id="meal-detail-section"></div>
+  </div>
+
+  <!-- ===== 体重タブ ===== -->
+  <div class="tab-content" id="tab-weight">
+    <div class="page-header">
+      <h1>体重記録</h1>
+      <p>目標：73kg → 65kg（▲8kg）</p>
+    </div>
+
+    <div class="section">
+      <div class="weight-input-card">
+        <div class="weight-date" id="input-date"></div>
+        <div class="weight-input-row">
+          <input class="weight-input" type="number" id="weight-input" step="0.1" placeholder="体重を入力 kg" min="40" max="150">
+          <button class="weight-btn" onclick="saveWeight()">記録</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">目標進捗</div>
+    </div>
+    <div class="goal-progress-card">
+      <div class="goal-row"><span class="goal-label">開始体重</span><span class="goal-value">73.0 kg</span></div>
+      <div class="goal-row"><span class="goal-label">目標体重</span><span class="goal-value">65.0 kg</span></div>
+      <div class="goal-row"><span class="goal-label">現在体重</span><span class="goal-value" id="current-weight-display">−</span></div>
+      <div class="goal-row"><span class="goal-label">残り</span><span class="goal-value" id="remaining-weight">−</span></div>
+      <div style="margin-top:12px">
+        <div class="progress-bar">
+          <div class="progress-fill" id="goal-bar" style="width:0%"></div>
+        </div>
+        <div class="progress-labels"><span>0%</span><span id="goal-pct-label">達成率 0%</span><span>100%</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📋 記録履歴</div>
+    </div>
+    <div class="weight-history" id="weight-history">
+      <div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">まだ記録がありません</div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">体重推移グラフ</div>
+      <canvas id="weight-chart" height="160"></canvas>
+    </div>
+  </div>
+
+  <!-- ===== レビュータブ ===== -->
+  <div class="tab-content" id="tab-review">
+    <div class="page-header">
+      <h1>週間レビュー</h1>
+      <p id="review-period">−</p>
+    </div>
+
+    <div class="week-nav">
+      <button class="week-nav-btn" onclick="changeReviewWeek(-1)">‹ 前の週</button>
+      <button class="week-nav-btn" id="week-nav-current" onclick="changeReviewWeek(0)">今週</button>
+      <button class="week-nav-btn" id="week-nav-next" onclick="changeReviewWeek(1)">次の週 ›</button>
+    </div>
+
+    <div class="section"><div class="section-title">🏃 運動サマリー</div></div>
+    <div class="metrics" id="review-exercise-metrics"></div>
+    <div id="review-exercise-chips" style="padding:0 16px 16px"></div>
+
+    <div class="section"><div class="section-title">⚖️ 体重の変化</div></div>
+    <div class="goal-progress-card" id="review-weight-summary"></div>
+
+    <div class="section"><div class="section-title">📝 今週の総括</div></div>
+    <div class="eval-card" id="review-overall"></div>
+  </div>
+
+  <!-- タブバー -->
+  <div class="tab-bar">
+    <button class="tab-item active" onclick="switchTab('today',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+      </span>
+      <span>今日</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('todo',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+      </span>
+      <span>ToDo</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('exercise',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="13" cy="4" r="1.5" fill="currentColor" stroke="none"/>
+          <path d="M7 13l3-5 3 4 2-2 3 4"/><path d="M5 21l4-8"/><path d="M19 21l-3-6"/>
+          <line x1="4" y1="21" x2="20" y2="21"/>
+        </svg>
+      </span>
+      <span>運動</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('meal',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 11l19-9-9 19-2-8-8-2z"/>
+        </svg>
+      </span>
+      <span>食事</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('weight',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4z"/>
+          <rect x="2" y="7" width="20" height="14" rx="2"/>
+          <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+        </svg>
+      </span>
+      <span>体重</span>
+    </button>
+    <button class="tab-item" onclick="switchTab('review',this)">
+      <span class="tab-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </span>
+      <span>レビュー</span>
+    </button>
+  </div>
+</div>
+
+<script>
+// ========== データ ==========
+const START_WEIGHT = 73.0;
+const GOAL_WEIGHT = 65.0;
+
+const WORKOUTS = [
+  { day:'月', icon:'🏃', type:'run',      badge:'badge-run',      label:'ランニング（LSD）',    sub:'6〜8km / ゆっくりペース',  kcal:'420〜560 kcal', items:[
+    {name:'ウォームアップ', detail:'歩き5分'},
+    {name:'LSDラン', detail:'6〜8km / 心拍116〜135bpm'},
+    {name:'クールダウン', detail:'歩き5分・ストレッチ'},
+  ]},
+  { day:'火', icon:'💪', type:'strength', badge:'badge-strength', label:'自重筋トレ',            sub:'6種目 / 約40〜50分',       kcal:'150〜200 kcal', items:[
+    {name:'プッシュアップ', detail:'3セット × 15〜20回'},
+    {name:'スクワット', detail:'3セット × 20回'},
+    {name:'ランジ', detail:'各脚3セット × 12回'},
+    {name:'プランク', detail:'3セット × 60秒'},
+    {name:'バーピー', detail:'3セット × 10回'},
+    {name:'マウンテンクライマー', detail:'3セット × 20回'},
+  ]},
+  { day:'水', icon:'🏃', type:'run',      badge:'badge-run',      label:'ランニング（テンポ）',  sub:'8〜10km / ハードペース',    kcal:'560〜700 kcal', items:[
+    {name:'ウォームアップ', detail:'歩き5分'},
+    {name:'テンポ走', detail:'8〜10km / 心拍135〜154bpm'},
+    {name:'クールダウン', detail:'歩き5分・ストレッチ'},
+  ]},
+  { day:'木', icon:'🚶', type:'rest',     badge:'badge-rest',     label:'休養 or ウォーキング', sub:'30分 / 軽め',               kcal:'100〜150 kcal', items:[
+    {name:'ウォーキング', detail:'30分 / ゆっくりペース'},
+    {name:'ストレッチ', detail:'10〜15分'},
+  ]},
+  { day:'金', icon:'🔥', type:'combo',    badge:'badge-combo',    label:'筋トレ＋ランニング',    sub:'筋トレ後 5km ラン',          kcal:'350〜450 kcal', items:[
+    {name:'自重筋トレ', detail:'火曜と同じ6種目'},
+    {name:'ランニング', detail:'5km / テンポ走'},
+  ]},
+  { day:'土', icon:'🏃', type:'run',      badge:'badge-run',      label:'ロングラン',            sub:'12〜16km / LSDペース',      kcal:'840〜1,120 kcal', items:[
+    {name:'ウォームアップ', detail:'歩き5分'},
+    {name:'ロングラン', detail:'12〜16km / 心拍116〜135bpm'},
+    {name:'クールダウン', detail:'歩き10分・入念ストレッチ'},
+  ]},
+  { day:'日', icon:'😴', type:'rest',     badge:'badge-rest',     label:'完全休養',              sub:'身体を休める日',             kcal:'0 kcal', items:[
+    {name:'完全オフ', detail:'翌週に向けて回復'},
+  ]},
+];
+
+// ========== 基本食事プラン（固定ベース） ==========
+const BASE_MEALS = [
+  {
+    id: 'breakfast', icon: '🌅', label: '朝食',
+    summary: 'プロテイン・野菜ジュース・チョコラBB',
+    kcal: 476,
+    protein: 44.0, fat: 9.5, carb: 59.0,
+    items: [
+      { name: '自作プロテイン（バナナ・牛乳200ml・プロテイン30g・イチゴミルク）', kcal: 405 },
+      { name: '野菜一日これ一本 200ml', kcal: 66 },
+      { name: 'チョコラBBライト 100ml', kcal: 5 },
+    ]
+  },
+  {
+    id: 'lunch', icon: '☀️', label: '昼食',
+    summary: '白米 + キーマカレー + 味噌汁',
+    kcal: 515,
+    protein: 15.0, fat: 10.5, carb: 90.0,
+    items: [
+      { name: '白米 200g', kcal: 330 },
+      { name: '咖喱屋キーマカレー中辛 150g', kcal: 150 },
+      { name: 'インスタント味噌汁 1杯', kcal: 35 },
+    ]
+  },
+  {
+    id: 'snack', icon: '🍫', label: '間食',
+    summary: 'バランスパワー + プロテイン',
+    kcal: 505,
+    protein: 38.5, fat: 19.0, carb: 43.0,
+    items: [
+      { name: 'バランスパワーチョコ 2本', kcal: 95 },
+      { name: '自作プロテイン', kcal: 410 },
+    ]
+  },
+  {
+    id: 'dinner', icon: '🌙', label: '夕食',
+    summary: '鶏もも + そば + 納豆 + 卵 + キムチ',
+    kcal: 714,
+    protein: 50.0, fat: 25.5, carb: 89.7,
+    items: [
+      { name: '鶏もも肉（皮あり）150g', kcal: 253 },
+      { name: '麺上手粗挽きそば 160g', kcal: 247 },
+      { name: '納豆 45g', kcal: 88 },
+      { name: '卵 1個', kcal: 76 },
+      { name: 'キムチ 70g', kcal: 50 },
+    ]
+  }
+];
+
+const MEAL_TARGETS = {
+  kcal:    { min: 2000, max: 2200 },
+  protein: { min: 110,  max: 130  },
+  fat:     { min: 60,   max: 70   },
+  carb:    { min: 260,  max: 300  },
+};
+
+// ========== 食事スポット変更ログ（localStorage） ==========
+// { "YYYY-MM-DD": { "breakfast": { name:"...", kcal:000, note:"..." }, ... } }
+function getMealLog() {
+  try { return JSON.parse(localStorage.getItem('mealLog') || '{}'); } catch(e) { return {}; }
+}
+function saveMealLog(log) {
+  try { localStorage.setItem('mealLog', JSON.stringify(log)); } catch(e) {}
+}
+function getMealOverride(dateStr, mealId) {
+  const log = getMealLog();
+  return (log[dateStr] || {})[mealId] || null;
+}
+function setMealOverride(dateStr, mealId, override) {
+  const log = getMealLog();
+  if(!log[dateStr]) log[dateStr] = {};
+  log[dateStr][mealId] = override;
+  saveMealLog(log);
+}
+function clearMealOverride(dateStr, mealId) {
+  const log = getMealLog();
+  if(log[dateStr]) {
+    delete log[dateStr][mealId];
+    if(Object.keys(log[dateStr]).length === 0) delete log[dateStr];
+  }
+  saveMealLog(log);
+}
+
+// 指定日の各食事（base + override を合成）を返す
+function getDayMeals(dateStr) {
+  return BASE_MEALS.map(bm => {
+    const ov = getMealOverride(dateStr, bm.id);
+    if(ov) {
+      return { ...bm, overridden: true, ov,
+               kcal: ov.kcal,
+               protein: ov.protein !== undefined ? ov.protein : bm.protein,
+               fat:     ov.fat     !== undefined ? ov.fat     : bm.fat,
+               carb:    ov.carb    !== undefined ? ov.carb    : bm.carb,
+      };
+    }
+    return { ...bm, overridden: false };
+  });
+}
+
+// 合計栄養素を計算
+function calcTotals(meals) {
+  return meals.reduce((acc, m) => {
+    acc.kcal    += m.kcal    || 0;
+    acc.protein += m.protein || 0;
+    acc.fat     += m.fat     || 0;
+    acc.carb    += m.carb    || 0;
+    return acc;
+  }, { kcal: 0, protein: 0, fat: 0, carb: 0 });
+}
+
+// ========== 体重データ（localStorage） ==========
+function getWeightData() {
+  try { return JSON.parse(localStorage.getItem('weightData') || '[]'); } catch(e) { return []; }
+}
+function saveWeightData(data) {
+  try { localStorage.setItem('weightData', JSON.stringify(data)); } catch(e) {}
+}
+
+// ========== 運動記録データ（localStorage） ==========
+// { "YYYY-MM-DD": 0〜6（WORKOUTSのインデックス） または "none"（運動なし） }
+function getExerciseLog() {
+  try { return JSON.parse(localStorage.getItem('exerciseLog') || '{}'); } catch(e) { return {}; }
+}
+function saveExerciseLog(log) {
+  try { localStorage.setItem('exerciseLog', JSON.stringify(log)); } catch(e) {}
+}
+function setExerciseForDate(dateStr, workoutId) {
+  const log = getExerciseLog();
+  log[dateStr] = workoutId;
+  saveExerciseLog(log);
+}
+function clearExerciseForDate(dateStr) {
+  const log = getExerciseLog();
+  delete log[dateStr];
+  saveExerciseLog(log);
+}
+
+// ========== 日付 ==========
+function formatDate(d) {
+  const days = ['日','月','火','水','木','金','土'];
+  return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${days[d.getDay()]}）`;
+}
+function formatDateShort(d) {
+  const dt = new Date(d);
+  return `${dt.getMonth()+1}/${dt.getDate()}`;
+}
+// ローカル日付を "YYYY-MM-DD" に変換（toISOString()はUTC基準のため日付がずれることがある）
+function toDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+// その日が属する週の月曜日（0時）を取得
+function getMonday(d) {
+  const date = new Date(d);
+  date.setHours(0,0,0,0);
+  const dow = (date.getDay() + 6) % 7; // 月=0 … 日=6
+  date.setDate(date.getDate() - dow);
+  return date;
+}
+
+// ========== タブ切り替え ==========
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  if(name === 'weight')   renderWeightHistory();
+  if(name === 'exercise') { renderDaySelector(); renderWeekSummary(); }
+  if(name === 'meal')     renderMealTab();
+  if(name === 'review')   renderReviewTab();
+  if(name === 'today')    renderTodayMeals();
+}
+
+// ========== ToDo ==========
+// ========== ToDo（localStorage永続化） ==========
+// { "YYYY-MM-DD": { "meal-breakfast": true, "exercise-today": true, ... } }
+function getTodoLog() {
+  try { return JSON.parse(localStorage.getItem('todoLog') || '{}'); } catch(e) { return {}; }
+}
+function saveTodoLog(log) {
+  try { localStorage.setItem('todoLog', JSON.stringify(log)); } catch(e) {}
+}
+function getTodayTodos() {
+  const log = getTodoLog();
+  return log[toDateStr(new Date())] || {};
+}
+function setTodoChecked(id, checked) {
+  const log = getTodoLog();
+  const ds = toDateStr(new Date());
+  if(!log[ds]) log[ds] = {};
+  if(checked) log[ds][id] = true;
+  else delete log[ds][id];
+  saveTodoLog(log);
+}
+
+function loadTodoState() {
+  const today = getTodayTodos();
+  document.querySelectorAll('#tab-todo .todo-item[data-todo-id]').forEach(item => {
+    const id = item.dataset.todoId;
+    const check = item.querySelector('.todo-check');
+    const text  = item.querySelector('.todo-text');
+    if(today[id]) {
+      check.classList.add('checked');
+      text.classList.add('done');
+    } else {
+      check.classList.remove('checked');
+      text.classList.remove('done');
+    }
+  });
+  updateTodoProgress();
+}
+
+function toggleTodo(item) {
+  const check = item.querySelector('.todo-check');
+  const text  = item.querySelector('.todo-text');
+  check.classList.toggle('checked');
+  text.classList.toggle('done');
+  const id = item.dataset.todoId;
+  if(id) setTodoChecked(id, check.classList.contains('checked'));
+  updateTodoProgress();
+  // 今日タブへ反映
+  renderTodayMeals();
+  renderTodayExercise();
+}
+
+function updateTodoProgress() {
+  const total = document.querySelectorAll('#tab-todo .todo-item').length;
+  const done  = document.querySelectorAll('#tab-todo .todo-check.checked').length;
+  document.getElementById('todo-progress-text').textContent = `${done} / ${total} 完了`;
+}
+
+// 運動タブで記録したとき、ToDoの「今日の運動を実施する」を自動チェック
+function syncExerciseTodo(hasRecord) {
+  const item = document.querySelector('#tab-todo .todo-item[data-todo-id="exercise-today"]');
+  if(!item) return;
+  const check = item.querySelector('.todo-check');
+  const text  = item.querySelector('.todo-text');
+  if(hasRecord) {
+    check.classList.add('checked');
+    text.classList.add('done');
+    setTodoChecked('exercise-today', true);
+  } else {
+    check.classList.remove('checked');
+    text.classList.remove('done');
+    setTodoChecked('exercise-today', false);
+  }
+  updateTodoProgress();
+}
+
+// ========== 食事タブ ==========
+let mealTabDate = null;       // 食事タブで表示中の日付 "YYYY-MM-DD"
+let mealEditOpen = null;      // 現在開いている編集フォームの mealId
+
+function renderMealTab() {
+  if(!mealTabDate) mealTabDate = toDateStr(new Date());
+  const meals = getDayMeals(mealTabDate);
+  const totals = calcTotals(meals);
+  const hasAnyOverride = meals.some(m => m.overridden);
+
+  // 日付ナビゲーション
+  const d = new Date(mealTabDate + 'T00:00:00');
+  const todayStr = toDateStr(new Date());
+  const prevStr = toDateStr(new Date(d.getFullYear(), d.getMonth(), d.getDate() - 1));
+  const nextStr = toDateStr(new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1));
+
+  const dayNames = ['日','月','火','水','木','金','土'];
+  const label = mealTabDate === todayStr ? '今日' : `${d.getMonth()+1}/${d.getDate()}（${dayNames[d.getDay()]}）`;
+  const subtitle = `${label}　合計 ${Math.round(totals.kcal).toLocaleString()} kcal${hasAnyOverride ? '　※変更あり' : ''}`;
+  document.getElementById('meal-tab-subtitle').textContent = subtitle;
+
+  // 栄養素バー
+  const barColors = { protein:'#1D9E75', fat:'#185FA5', carb:'#854F0B', iron:'#A32D2D', vitd:'#EF9F27' };
+  const nutrientBars = [
+    { key: 'protein', label: 'たんぱく質', val: totals.protein, unit: 'g', target: MEAL_TARGETS.protein.max },
+    { key: 'fat',     label: '脂質',       val: totals.fat,     unit: 'g', target: MEAL_TARGETS.fat.max     },
+    { key: 'carb',    label: '炭水化物',   val: totals.carb,    unit: 'g', target: MEAL_TARGETS.carb.max    },
+  ].map(n => {
+    const pct = Math.min(100, Math.round((n.val / n.target) * 100));
+    const ok = n.val >= MEAL_TARGETS[n.key]?.min && n.val <= n.target * 1.15;
+    const mark = ok ? '✅' : (n.val < (MEAL_TARGETS[n.key]?.min || 0) ? '⚠️' : '↑');
+    return `<div class="nutrient-row">
+      <div class="nutrient-header"><span class="nutrient-name">${n.label}</span><span class="nutrient-val">${n.val.toFixed(1)}${n.unit} / 目標${n.target}${n.unit} ${mark}</span></div>
+      <div class="nutrient-bar"><div class="nutrient-fill" style="width:${pct}%;background:${barColors[n.key]}"></div></div>
+    </div>`;
+  }).join('');
+  document.getElementById('nutrient-bars-dynamic').innerHTML = nutrientBars;
+
+  // 食事詳細カードとスポット変更UI
+  const todayMealDate = mealTabDate;
+  let html = `<div class="meal-override-bar">
+    <span class="meal-override-label">
+      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer" onclick="mealTabDate='${prevStr}';renderMealTab()">‹</button>
+      &nbsp;${label}&nbsp;
+      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer;${mealTabDate >= todayStr ? 'opacity:0.3;pointer-events:none' : ''}" onclick="mealTabDate='${nextStr}';renderMealTab()">›</button>
+    </span>
+    ${hasAnyOverride ? '<span style="font-size:11px;color:var(--amber)">⚡ スポット変更あり</span>' : '<span style="font-size:11px;color:var(--text3)">基本プラン</span>'}
+  </div>`;
+
+  meals.forEach(m => {
+    const isEditOpen = mealEditOpen === m.id;
+    const modClass   = m.overridden ? 'meal-card-modified' : '';
+    const modBadge   = m.overridden ? '<span class="meal-badge-mod">変更</span>' : '';
+    const baseKcal   = m.overridden ? `<span class="meal-card-default-kcal">${BASE_MEALS.find(b=>b.id===m.id).kcal}</span>` : '';
+    const itemsHtml  = m.overridden
+      ? `<div class="meal-detail-item"><span class="meal-detail-name">${m.ov.name}</span><span class="meal-detail-kcal">${m.kcal}</span></div>
+         ${m.ov.note ? `<div style="font-size:11px;color:var(--text3);padding:2px 0 0 0">${m.ov.note}</div>` : ''}`
+      : m.items.map(i => `<div class="meal-detail-item"><span class="meal-detail-name">${i.name}</span><span class="meal-detail-kcal">${i.kcal}</span></div>`).join('');
+
+    html += `<div class="meal-detail-card ${modClass}">
+      <div class="meal-detail-header" style="display:flex;justify-content:space-between;align-items:center">
+        <span>${m.icon} ${m.label}${modBadge}</span>
+        <span style="display:flex;align-items:center;gap:8px">
+          ${baseKcal}<span style="font-weight:600">${m.kcal} kcal</span>
+          <span style="font-size:12px;color:var(--accent);cursor:pointer;padding:2px 8px;border:1px solid var(--border);border-radius:6px" onclick="toggleMealEdit('${m.id}','${todayMealDate}')">${isEditOpen ? '閉じる' : '変更'}</span>
+          ${m.overridden ? `<span style="font-size:12px;color:var(--red);cursor:pointer;padding:2px 8px;border:1px solid var(--border);border-radius:6px" onclick="resetMeal('${m.id}','${todayMealDate}')">戻す</span>` : ''}
+        </span>
+      </div>
+      ${itemsHtml}
+    </div>`;
+
+    if(isEditOpen) {
+      const bm = BASE_MEALS.find(b => b.id === m.id);
+      const cur = m.ov || {};
+      html += `<div class="meal-edit-form" id="edit-form-${m.id}">
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px">この食事の内容を概算で変更します。食品名を入力して🔍で栄養素を自動検索できます。</div>
+        <div class="meal-edit-row">
+          <span class="meal-edit-label">内容</span>
+          <input class="meal-edit-name" id="edit-name-${m.id}" placeholder="${bm.summary}" value="${cur.name||''}">
+        </div>
+        <div class="meal-edit-row" style="justify-content:flex-end">
+          <button class="meal-search-btn" id="search-btn-${m.id}" onclick="searchNutrition('${m.id}')">
+            🔍 栄養素を検索
+          </button>
+        </div>
+        <div id="search-result-${m.id}"></div>
+        <div class="meal-edit-row">
+          <span class="meal-edit-label">kcal</span>
+          <input class="meal-edit-kcal" id="edit-kcal-${m.id}" type="number" placeholder="${bm.kcal}" value="${cur.kcal||''}">
+          <span style="font-size:12px;color:var(--text3)">（基本: ${bm.kcal} kcal）</span>
+        </div>
+        <div class="meal-edit-row">
+          <span class="meal-edit-label">P(g)</span>
+          <input class="meal-edit-kcal" id="edit-p-${m.id}" type="number" step="0.1" placeholder="${bm.protein}" value="${cur.protein!==undefined?cur.protein:''}">
+          <span style="font-size:12px;color:var(--text3)">Fat</span>
+          <input class="meal-edit-kcal" id="edit-f-${m.id}" type="number" step="0.1" placeholder="${bm.fat}" value="${cur.fat!==undefined?cur.fat:''}">
+          <span style="font-size:12px;color:var(--text3)">C</span>
+          <input class="meal-edit-kcal" id="edit-c-${m.id}" type="number" step="0.1" placeholder="${bm.carb}" value="${cur.carb!==undefined?cur.carb:''}">
+        </div>
+        <div class="meal-edit-row">
+          <span class="meal-edit-label">備考</span>
+          <input class="meal-edit-name" id="edit-note-${m.id}" placeholder="例：外食のため概算" value="${cur.note||''}">
+        </div>
+        <div class="meal-edit-actions">
+          <button class="meal-edit-clear" onclick="resetMeal('${m.id}','${todayMealDate}')">基本に戻す</button>
+          <button class="meal-edit-save" onclick="saveMealEdit('${m.id}','${todayMealDate}')">保存</button>
+        </div>
+      </div>`;
+    }
+  });
+
+  document.getElementById('meal-detail-section').innerHTML = html;
+}
+
+function toggleMealEdit(mealId, dateStr) {
+  mealTabDate = dateStr;
+  mealEditOpen = (mealEditOpen === mealId) ? null : mealId;
+  renderMealTab();
+}
+
+// ========== 食事：AI栄養素検索 ==========
+async function searchNutrition(mealId) {
+  const nameEl   = document.getElementById(`edit-name-${mealId}`);
+  const query    = nameEl.value.trim();
+  if(!query) {
+    document.getElementById(`search-result-${mealId}`).innerHTML =
+      '<div class="search-error-note">内容欄に食品名を入力してから検索してください</div>';
+    return;
+  }
+
+  const btn     = document.getElementById(`search-btn-${mealId}`);
+  const resultEl = document.getElementById(`search-result-${mealId}`);
+
+  btn.disabled  = true;
+  btn.innerHTML = '<span class="spin">⟳</span> 検索中…';
+  resultEl.innerHTML = '';
+
+  const prompt = `次の食品・料理について、日本の一般的な1食分（または記載量）あたりのカロリーと栄養素を調べてください。
+
+対象: 「${query}」
+
+以下のJSON形式のみで回答してください。説明文・マークダウン・コードブロックは不要です。
+{
+  "kcal": 数値,
+  "protein_g": 数値,
+  "fat_g": 数値,
+  "carb_g": 数値,
+  "source": "参照した情報源の簡潔な説明（例：カロリーSlim、食品成分データベース等）",
+  "note": "量の前提など補足があれば（例：定食1人前想定）"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    // テキストブロックを結合してJSONを抽出
+    const textBlocks = (data.content || [])
+      .filter(b => b.type === 'text')
+      .map(b => b.text)
+      .join('');
+
+    // JSONを探してパース（コードブロックや前後テキストを除去）
+    const jsonMatch = textBlocks.match(/\{[\s\S]*\}/);
+    if(!jsonMatch) throw new Error('JSON not found in response');
+    const nutrition = JSON.parse(jsonMatch[0]);
+
+    // フィールドに自動入力
+    const set = (id, val) => {
+      const el = document.getElementById(id);
+      if(el && val !== undefined && val !== null) el.value = val;
+    };
+    set(`edit-kcal-${mealId}`, Math.round(nutrition.kcal));
+    set(`edit-p-${mealId}`,    nutrition.protein_g !== undefined ? parseFloat(nutrition.protein_g).toFixed(1) : '');
+    set(`edit-f-${mealId}`,    nutrition.fat_g     !== undefined ? parseFloat(nutrition.fat_g).toFixed(1)     : '');
+    set(`edit-c-${mealId}`,    nutrition.carb_g    !== undefined ? parseFloat(nutrition.carb_g).toFixed(1)    : '');
+
+    const note   = nutrition.note   ? `　${nutrition.note}`   : '';
+    const source = nutrition.source ? `出典：${nutrition.source}` : '';
+    resultEl.innerHTML = `
+      <div style="background:var(--green-bg);border:1px solid var(--green);border-radius:6px;padding:8px 12px;margin-bottom:8px">
+        <span style="font-size:12px;font-weight:600;color:var(--green)">✓ AI概算で入力しました</span>
+        <span class="ai-badge">AI概算</span>
+        <div class="search-result-note">${note}${note && source ? '　' : ''}${source}<br>数値は概算です。必要に応じて修正してから保存してください。</div>
+      </div>`;
+
+  } catch(e) {
+    console.error('searchNutrition error:', e);
+    resultEl.innerHTML = `<div class="search-error-note">検索に失敗しました（${e.message}）。手動で入力してください。</div>`;
+  } finally {
+    btn.disabled  = false;
+    btn.innerHTML = '🔍 栄養素を検索';
+  }
+}
+
+function saveMealEdit(mealId, dateStr) {
+  const bm = BASE_MEALS.find(b => b.id === mealId);
+  const nameEl  = document.getElementById(`edit-name-${mealId}`);
+  const kcalEl  = document.getElementById(`edit-kcal-${mealId}`);
+  const pEl     = document.getElementById(`edit-p-${mealId}`);
+  const fEl     = document.getElementById(`edit-f-${mealId}`);
+  const cEl     = document.getElementById(`edit-c-${mealId}`);
+  const noteEl  = document.getElementById(`edit-note-${mealId}`);
+
+  const name = nameEl.value.trim() || bm.summary;
+  const kcal = parseFloat(kcalEl.value) || bm.kcal;
+  const note = noteEl.value.trim();
+  const ov = { name, kcal, note };
+  if(pEl.value !== '') ov.protein = parseFloat(pEl.value);
+  if(fEl.value !== '') ov.fat     = parseFloat(fEl.value);
+  if(cEl.value !== '') ov.carb    = parseFloat(cEl.value);
+
+  setMealOverride(dateStr, mealId, ov);
+  mealEditOpen = null;
+  renderMealTab();
+  if(dateStr === toDateStr(new Date())) renderTodayMeals();
+}
+
+function resetMeal(mealId, dateStr) {
+  clearMealOverride(dateStr, mealId);
+  mealEditOpen = null;
+  renderMealTab();
+  if(dateStr === toDateStr(new Date())) renderTodayMeals();
+}
+
+// ========== 今日タブ：食事サマリー更新 ==========
+// ToDoでチェックされた食事のみカロリー/栄養素を積み上げる
+function renderTodayMeals() {
+  const todayStr   = toDateStr(new Date());
+  const meals      = getDayMeals(todayStr);
+  const todoState  = getTodayTodos();
+
+  // meal-id → todo-id のマッピング
+  const MEAL_TODO = {
+    breakfast: 'meal-breakfast',
+    lunch:     'meal-lunch',
+    snack:     'meal-snack',
+    dinner:    'meal-dinner',
+  };
+
+  let kcal = 0, protein = 0, fat = 0, carb = 0;
+  const cardHtml = meals.map(m => {
+    const checked = !!todoState[MEAL_TODO[m.id]];
+    if(checked) { kcal += m.kcal; protein += m.protein; fat += m.fat; carb += m.carb; }
+    const label    = m.overridden ? m.ov.name : m.summary;
+    const modBadge = m.overridden ? ' <span class="meal-badge-mod">変更</span>' : '';
+    const opacity  = checked ? '' : 'opacity:0.4;';
+    const borderL  = checked ? (m.overridden ? 'border-left:3px solid var(--amber);' : 'border-left:3px solid var(--accent);') : '';
+    return `<div class="meal-card" style="${opacity}${borderL}">
+      <div>
+        <div class="meal-name">${m.icon} ${m.label}${modBadge}${checked ? '' : ' <span style="font-size:11px;color:var(--text3)">（未）</span>'}</div>
+        <div class="meal-detail">${label}</div>
+      </div>
+      <div class="meal-kcal">${Math.round(m.kcal)} kcal</div>
+    </div>`;
+  }).join('');
+  document.getElementById('today-meal-cards').innerHTML = cardHtml;
+
+  // メトリクス更新（チェックされた分だけ表示、0件は pending）
+  const anyChecked = meals.some(m => !!todoState[MEAL_TODO[m.id]]);
+
+  const setMetric = (elId, subId, value, unit, min, max, label) => {
+    const el  = document.getElementById(elId);
+    const sub = subId ? document.getElementById(subId) : null;
+    if(!anyChecked) {
+      el.textContent = '−';
+      el.className = 'metric-value metric-pending';
+      if(sub) sub.textContent = label;
+      return;
+    }
+    el.textContent = unit === 'kcal'
+      ? Math.round(value).toLocaleString()
+      : `${value.toFixed(1)}g`;
+    const cls = value < min ? 'metric-warn'
+              : value > max * 1.15 ? 'metric-warn'
+              : 'metric-good';
+    el.className = `metric-value ${cls}`;
+    if(sub) {
+      const mark = value >= min && value <= max * 1.15 ? '✓' : (value < min ? '⚠' : '↑');
+      sub.textContent = unit === 'kcal'
+        ? `目標 2,000〜2,200 kcal`
+        : `目標 ${min}〜${max}${unit} ${mark}`;
+    }
+  };
+
+  setMetric('today-kcal',    null,              kcal,    'kcal', 2000, 2200, '目標 2,000〜2,200 kcal');
+  setMetric('today-protein', 'today-protein-sub', protein, 'g', 110, 130,  '目標 110〜130g');
+  setMetric('today-fat',     'today-fat-sub',     fat,     'g', 60,  70,   '目標 60〜70g');
+  setMetric('today-carb',    'today-carb-sub',    carb,    'g', 260, 300,  '目標 260〜300g');
+
+  // metric-card 全体の pending クラス
+  document.querySelectorAll('#today-metrics .metric-card').forEach(card => {
+    card.classList.toggle('pending', !anyChecked);
+  });
+}
+
+// ========== 今日タブ：運動記録 ==========
+function renderTodayExercise() {
+  const todayStr  = toDateStr(new Date());
+  const log       = getExerciseLog();
+  const workoutId = log[todayStr];
+  const container = document.getElementById('today-exercise-card');
+
+  if(workoutId === undefined) {
+    container.innerHTML = `<div class="today-exercise-card no-record">
+      <div>
+        <div class="today-exercise-name">未記録</div>
+        <div class="today-exercise-sub">運動タブから今日の記録を入力してください</div>
+      </div>
+    </div>`;
+    syncExerciseTodo(false);
+    return;
+  }
+  if(workoutId === 'none') {
+    container.innerHTML = `<div class="today-exercise-card no-record">
+      <div>
+        <div class="today-exercise-name">🚶 運動なし</div>
+        <div class="today-exercise-sub">この日は運動を行いませんでした</div>
+      </div>
+      <div class="today-exercise-kcal">0 kcal</div>
+    </div>`;
+    syncExerciseTodo(true); // 「なし」でも記録はした
+    return;
+  }
+  const w = WORKOUTS[workoutId];
+  container.innerHTML = `<div class="today-exercise-card has-record">
+    <div>
+      <div class="today-exercise-name">${w.icon || '🏃'} ${w.label}</div>
+      <div class="today-exercise-sub">${w.sub}</div>
+    </div>
+    <div class="today-exercise-kcal">${w.kcal}</div>
+  </div>`;
+  syncExerciseTodo(true);
+}
+
+// ========== 運動：日付選択 ==========
+let selectedExerciseDate = null; // 運動タブで現在選択中の日付 "YYYY-MM-DD"
+
+function renderDaySelector() {
+  const monday = getMonday(new Date());
+  const dayNames = ['月','火','水','木','金','土','日'];
+  const log = getExerciseLog();
+  const todayStr = toDateStr(new Date());
+  if(!selectedExerciseDate) selectedExerciseDate = todayStr;
+
+  let html = '';
+  for(let i=0; i<7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const ds = toDateStr(d);
+    const isToday = ds === todayStr;
+    const isActive = ds === selectedExerciseDate;
+    const hasRecord = log[ds] !== undefined;
+    html += `<button class="day-btn ${isActive ? 'active' : ''} ${isToday ? 'day-today' : ''}" onclick="selectExerciseDate('${ds}', this)">
+      <span class="day-btn-dow">${dayNames[i]}</span>
+      <span class="day-btn-date">${d.getMonth()+1}/${d.getDate()}</span>
+      ${hasRecord ? '<span class="day-btn-dot"></span>' : ''}
+    </button>`;
+  }
+  document.getElementById('day-selector').innerHTML = html;
+  renderWorkoutDisplay();
+  renderMenuPicker();
+}
+
+function selectExerciseDate(ds, btn) {
+  selectedExerciseDate = ds;
+  document.querySelectorAll('#day-selector .day-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderWorkoutDisplay();
+  renderMenuPicker();
+}
+
+function renderWorkoutDisplay() {
+  const log = getExerciseLog();
+  const id = log[selectedExerciseDate];
+  const container = document.getElementById('workout-display');
+
+  if(id === undefined) {
+    container.innerHTML = `<div class="workout-card workout-empty">
+      <div class="workout-empty-text">この日の運動はまだ記録されていません。<br>下のメニューから、実際に行った運動を選んでください。</div>
+    </div>`;
+    return;
+  }
+  if(id === 'none') {
+    container.innerHTML = `<div class="workout-card">
+      <div class="workout-title">運動なし</div>
+      <span class="workout-badge badge-rest">0 kcal</span>
+      <div class="workout-sub">この日は運動を行いませんでした</div>
+      <div class="workout-delete-btn" onclick="clearWorkoutRecord()">この記録を削除</div>
+    </div>`;
+    return;
+  }
+  const w = WORKOUTS[id];
+  const items = w.items.map(i => `
+    <div class="exercise-item">
+      <div><div class="exercise-name">${i.name}</div><div class="exercise-detail">${i.detail}</div></div>
+    </div>`).join('');
+  container.innerHTML = `
+    <div class="workout-card">
+      <div class="workout-title">${w.label}</div>
+      <div class="workout-sub">${w.sub}</div>
+      <span class="workout-badge ${w.badge}">${w.kcal}</span>
+      <div class="exercise-list">${items}</div>
+      <div class="workout-delete-btn" onclick="clearWorkoutRecord()">この記録を削除</div>
+    </div>`;
+}
+
+function clearWorkoutRecord() {
+  clearExerciseForDate(selectedExerciseDate);
+  renderDaySelector();
+  renderWeekSummary();
+  if(selectedExerciseDate === toDateStr(new Date())) renderTodayExercise();
+}
+
+function renderMenuPicker() {
+  const log = getExerciseLog();
+  const current = log[selectedExerciseDate];
+  const optionsHtml = WORKOUTS.map((w, idx) => `
+    <div class="menu-option ${current === idx ? 'selected' : ''}" onclick="chooseWorkout(${idx})">
+      <div>
+        <span class="workout-badge ${w.badge}" style="margin-bottom:0">${w.label}</span>
+        <div class="menu-option-sub">${w.sub} ・ ${w.kcal}</div>
+        <div class="menu-option-ref">目安：${w.day}曜日のメニュー</div>
+      </div>
+      ${current === idx ? '<span class="menu-option-check">✓</span>' : ''}
+    </div>`).join('');
+  const noneHtml = `
+    <div class="menu-option ${current === 'none' ? 'selected' : ''}" onclick="chooseWorkout('none')">
+      <div>
+        <span class="workout-badge badge-rest" style="margin-bottom:0">運動なし</span>
+        <div class="menu-option-sub">この日は実施しなかった</div>
+      </div>
+      ${current === 'none' ? '<span class="menu-option-check">✓</span>' : ''}
+    </div>`;
+  document.getElementById('menu-picker').innerHTML = optionsHtml + noneHtml;
+}
+
+function chooseWorkout(id) {
+  if(!selectedExerciseDate) return;
+  setExerciseForDate(selectedExerciseDate, id);
+  renderDaySelector();
+  renderWeekSummary();
+  if(selectedExerciseDate === toDateStr(new Date())) renderTodayExercise();
+}
+
+// ========== 運動：週間集計・効果評価 ==========
+function parseKcalRange(kcalStr) {
+  const nums = (kcalStr.match(/[\d,]+/g) || []).map(n => parseInt(n.replace(/,/g, ''), 10));
+  if(nums.length === 0) return [0, 0];
+  if(nums.length === 1) return [nums[0], nums[0]];
+  return [nums[0], nums[1]];
+}
+
+function getWeekRecords(monday) {
+  const log = getExerciseLog();
+  const dayNames = ['月','火','水','木','金','土','日'];
+  const days = [];
+  for(let i=0; i<7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const ds = toDateStr(d);
+    days.push({ date: ds, dow: dayNames[i], dateLabel: `${d.getMonth()+1}/${d.getDate()}`, workoutId: log[ds] });
+  }
+  return days;
+}
+
+function summarizeWeek(days) {
+  let kcalMin = 0, kcalMax = 0;
+  let runCount = 0, strengthCount = 0, comboCount = 0, restCount = 0, noneCount = 0, recordedCount = 0;
+  days.forEach(d => {
+    if(d.workoutId === undefined) return;
+    recordedCount++;
+    if(d.workoutId === 'none') { noneCount++; return; }
+    const w = WORKOUTS[d.workoutId];
+    const [mn, mx] = parseKcalRange(w.kcal);
+    kcalMin += mn; kcalMax += mx;
+    if(w.type === 'run') runCount++;
+    else if(w.type === 'strength') strengthCount++;
+    else if(w.type === 'combo') comboCount++;
+    else if(w.type === 'rest') restCount++;
+  });
+  const activeCount = recordedCount - noneCount;
+  return { kcalMin, kcalMax, runCount, strengthCount, comboCount, restCount, noneCount, recordedCount, activeCount };
+}
+
+function evaluateWeek(stats) {
+  if(stats.recordedCount === 0) {
+    return { level: 'empty', text: 'まだこの週の記録がありません。運動した日にメニューを選んで記録してみましょう。' };
+  }
+  const trainingDays = stats.runCount + stats.strengthCount + stats.comboCount;
+  const restLikeDays = stats.restCount + stats.noneCount;
+  const messages = [];
+  let level;
+
+  if(trainingDays >= 4 && restLikeDays >= 1) {
+    level = 'good';
+    messages.push('運動と休養のバランスが取れた、理想的な1週間です。この調子を維持しましょう。');
+  } else if(trainingDays >= 4 && restLikeDays === 0) {
+    level = 'warn';
+    messages.push('運動日数は十分ですが、休養日が0日です。オーバートレーニングを避けるため、週に最低1日は完全休養を入れることをおすすめします。');
+  } else if(trainingDays <= 1) {
+    level = 'low';
+    messages.push('運動した日が少なめの1週間でした。無理のない範囲で、運動する日を少しずつ増やしてみましょう。');
+  } else {
+    level = 'warn';
+    messages.push('まずまずのペースです。あと1〜2日運動を増やせると、さらに効果が高まります。');
+  }
+
+  if(stats.runCount > 0 && stats.strengthCount === 0 && stats.comboCount === 0) {
+    messages.push('ランニング中心で、筋トレの日が0日でした。週1回程度は自重筋トレも取り入れると、基礎代謝の維持に役立ちます。');
+  } else if(stats.strengthCount > 0 && stats.runCount === 0 && stats.comboCount === 0) {
+    messages.push('筋トレ中心で、ランニングの日が0日でした。有酸素運動も組み合わせると、減量がより進みやすくなります。');
+  }
+
+  if(stats.noneCount >= 3) {
+    messages.push(`「運動なし」の日が${stats.noneCount}日ありました。来週はもう少し運動できる日を確保できると良いでしょう。`);
+  }
+
+  return { level, text: messages.join(' ') };
+}
+
+function renderWeekSummary() {
+  const monday = getMonday(new Date());
+  const days = getWeekRecords(monday);
+  const stats = summarizeWeek(days);
+  const evalResult = evaluateWeek(stats);
+
+  const rows = days.map(d => {
+    let label, badgeClass;
+    if(d.workoutId === undefined) { label = '未記録'; badgeClass = 'badge-rest'; }
+    else if(d.workoutId === 'none') { label = '運動なし'; badgeClass = 'badge-rest'; }
+    else { const w = WORKOUTS[d.workoutId]; label = w.label; badgeClass = w.badge; }
+    return `<div class="zone-row"><span class="zone-name">${d.dow}（${d.dateLabel}）</span><span class="workout-badge ${badgeClass}" style="margin-bottom:0">${label}</span></div>`;
+  }).join('');
+
+  document.getElementById('week-summary').innerHTML = `
+    <div class="zone-table" style="margin-bottom:14px">${rows}</div>
+    <div class="metrics" style="padding:0 16px 14px">
+      <div class="metric-card"><div class="metric-label">運動した日数</div><div class="metric-value">${stats.activeCount} / 7日</div></div>
+      <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}〜${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>
+    </div>
+    <div class="eval-card eval-${evalResult.level}">
+      <div class="eval-label">効果の評価</div>
+      <div class="eval-text">${evalResult.text}</div>
+    </div>`;
+}
+
+// ========== 週間レビュータブ ==========
+let reviewWeekOffset = 0; // 0=今週, -1=先週 ...
+
+function changeReviewWeek(delta) {
+  if(delta === 0) {
+    reviewWeekOffset = 0;
+  } else {
+    const next = reviewWeekOffset + delta;
+    if(next > 0) return; // 未来の週へは進めない
+    reviewWeekOffset = next;
+  }
+  renderReviewTab();
+}
+
+function renderReviewTab() {
+  const monday = getMonday(new Date());
+  monday.setDate(monday.getDate() + reviewWeekOffset * 7);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  document.getElementById('review-period').textContent =
+    `${monday.getFullYear()}年${monday.getMonth()+1}月${monday.getDate()}日 〜 ${sunday.getMonth()+1}月${sunday.getDate()}日`;
+
+  document.getElementById('week-nav-current').classList.toggle('current', reviewWeekOffset === 0);
+  document.getElementById('week-nav-next').classList.toggle('disabled', reviewWeekOffset === 0);
+
+  // 運動サマリー
+  const days = getWeekRecords(monday);
+  const stats = summarizeWeek(days);
+  const evalResult = evaluateWeek(stats);
+
+  document.getElementById('review-exercise-metrics').innerHTML = `
+    <div class="metric-card"><div class="metric-label">運動した日数</div><div class="metric-value">${stats.activeCount} / 7日</div></div>
+    <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}〜${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>`;
+
+  const chip = (label, count) => count > 0 ? `<span class="review-chip">${label} ${count}日</span>` : '';
+  const chips = [
+    chip('🏃 ラン', stats.runCount),
+    chip('💪 筋トレ', stats.strengthCount),
+    chip('🔥 複合', stats.comboCount),
+    chip('🚶 休養系', stats.restCount),
+    chip('— 未実施', stats.noneCount),
+  ].filter(Boolean).join(' ');
+  document.getElementById('review-exercise-chips').innerHTML = chips || '<span style="font-size:12px;color:var(--text3)">記録がありません</span>';
+
+  // 体重サマリー
+  const weightData = getWeightData();
+  const monStr = toDateStr(monday), sunStr = toDateStr(sunday);
+  const inWeek = weightData.filter(d => d.date >= monStr && d.date <= sunStr).sort((a,b) => a.date.localeCompare(b.date));
+  const weightContainer = document.getElementById('review-weight-summary');
+  let weightComment = '';
+  if(inWeek.length === 0) {
+    weightContainer.innerHTML = `<div style="text-align:center;color:var(--text3);font-size:13px;padding:6px 0">この週の体重記録がありません</div>`;
+  } else {
+    const start = inWeek[0], end = inWeek[inWeek.length - 1];
+    const diff = end.weight - start.weight;
+    const diffCls = diff <= 0 ? 'down' : 'up';
+    const sign = diff <= 0 ? '' : '+';
+    weightContainer.innerHTML = `
+      <div class="goal-row"><span class="goal-label">週初め（${formatDateShort(start.date)}）</span><span class="goal-value">${start.weight.toFixed(1)} kg</span></div>
+      <div class="goal-row"><span class="goal-label">週末（${formatDateShort(end.date)}）</span><span class="goal-value">${end.weight.toFixed(1)} kg</span></div>
+      <div class="goal-row"><span class="goal-label">週間の変化</span><span class="goal-value weight-diff ${diffCls}" style="font-size:14px">${sign}${diff.toFixed(1)} kg</span></div>`;
+    if(inWeek.length >= 2) {
+      if(diff < 0) weightComment = ' 体重も順調に減少しており、運動の効果が出ています。';
+      else if(diff > 0) weightComment = ' 体重は増加傾向でした。食事量や運動量を見直してみましょう。';
+      else weightComment = ' 体重はほぼ横ばいでした。';
+    }
+  }
+
+  // 総合評価
+  const overall = document.getElementById('review-overall');
+  overall.className = `eval-card eval-${evalResult.level}`;
+  overall.innerHTML = `<div class="eval-label">今週の総括</div><div class="eval-text">${evalResult.text}${weightComment}</div>`;
+}
+
+// ========== 体重記録 ==========
+function saveWeight() {
+  const val = parseFloat(document.getElementById('weight-input').value);
+  if(isNaN(val) || val < 30 || val > 200) { alert('正しい体重を入力してください'); return; }
+  const data = getWeightData();
+  const today = toDateStr(new Date());
+  const existing = data.findIndex(d => d.date === today);
+  if(existing >= 0) { data[existing].weight = val; }
+  else { data.push({date: today, weight: val}); }
+  data.sort((a,b) => a.date.localeCompare(b.date));
+  saveWeightData(data);
+  document.getElementById('weight-input').value = '';
+  renderWeightHistory();
+  updateWeightProgress(val);
+}
+
+function updateWeightProgress(current) {
+  const pct = Math.min(100, Math.max(0, Math.round((START_WEIGHT - current) / (START_WEIGHT - GOAL_WEIGHT) * 100)));
+  document.getElementById('current-weight-label').textContent = current.toFixed(1);
+  document.getElementById('weight-bar').style.width = pct + '%';
+  document.getElementById('weight-pct').textContent = pct + '%';
+  document.getElementById('current-weight-display').textContent = current.toFixed(1) + ' kg';
+  const rem = Math.max(0, current - GOAL_WEIGHT);
+  document.getElementById('remaining-weight').textContent = rem.toFixed(1) + ' kg';
+  document.getElementById('goal-bar').style.width = pct + '%';
+  document.getElementById('goal-pct-label').textContent = `達成率 ${pct}%`;
+}
+
+function renderWeightHistory() {
+  const data = getWeightData();
+  const container = document.getElementById('weight-history');
+  if(data.length === 0) {
+    container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">まだ記録がありません</div>';
+    return;
+  }
+  const sorted = [...data].reverse();
+  const html = sorted.map((d, i) => {
+    const prev = sorted[i+1];
+    let diffHtml = '';
+    if(prev) {
+      const diff = d.weight - prev.weight;
+      const cls = diff <= 0 ? 'down' : 'up';
+      const sign = diff <= 0 ? '' : '+';
+      diffHtml = `<span class="weight-diff ${cls}">${sign}${diff.toFixed(1)}kg</span>`;
+    }
+    return `<div class="weight-history-item">
+      <span class="weight-date-col">${formatDateShort(d.date)}</span>
+      <div style="text-align:right">
+        <span class="weight-value-col">${d.weight.toFixed(1)} kg</span>
+        ${diffHtml}
+      </div>
+    </div>`;
+  }).join('');
+  container.innerHTML = html;
+
+  if(data.length > 0) {
+    updateWeightProgress(data[data.length-1].weight);
+    renderWeightChart(data);
+  }
+}
+
+function renderWeightChart(data) {
+  const canvas = document.getElementById('weight-chart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = 160;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+
+  const weights = data.map(d => d.weight);
+  const minW = Math.min(...weights, GOAL_WEIGHT) - 1;
+  const maxW = Math.max(...weights, START_WEIGHT) + 1;
+  const pad = { t:10, r:10, b:30, l:36 };
+  const cw = w - pad.l - pad.r;
+  const ch = h - pad.t - pad.b;
+
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0,0,w,h);
+
+  // グリッド線
+  ctx.strokeStyle = '#e8e8e8';
+  ctx.lineWidth = 1;
+  for(let i=0; i<=4; i++) {
+    const y = pad.t + ch * i / 4;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(w-pad.r,y); ctx.stroke();
+    const val = maxW - (maxW-minW)*i/4;
+    ctx.fillStyle = '#999'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(val.toFixed(1), pad.l-4, y+3);
+  }
+
+  if(data.length < 2) { return; }
+
+  // 目標ライン
+  const goalY = pad.t + ch * (maxW - GOAL_WEIGHT) / (maxW - minW);
+  ctx.strokeStyle = '#1D9E75'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(pad.l,goalY); ctx.lineTo(w-pad.r,goalY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#1D9E75'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('目標', pad.l+2, goalY-3);
+
+  // 体重折れ線
+  const pts = data.map((d,i) => ({
+    x: pad.l + cw * i / (data.length-1),
+    y: pad.t + ch * (maxW - d.weight) / (maxW - minW)
+  }));
+  ctx.strokeStyle = '#185FA5'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+  ctx.stroke();
+
+  // ポイント・日付
+  pts.forEach((p,i) => {
+    ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2);
+    ctx.fillStyle = '#185FA5'; ctx.fill();
+    if(i===0 || i===pts.length-1) {
+      ctx.fillStyle = '#666'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(formatDateShort(data[i].date), p.x, h-pad.b+14);
+    }
+  });
+}
+
+// ========== 初期化 ==========
+window.addEventListener('load', function() {
+  // 日付設定
+  const now = new Date();
+  document.getElementById('today-date').textContent = formatDate(now);
+  document.getElementById('input-date').textContent = formatDate(now);
+
+  // 食事タブ・今日タブ
+  mealTabDate = toDateStr(now);
+  renderTodayMeals();
+  renderTodayExercise();
+
+  // ToDo状態の復元
+  loadTodoState();
+
+  // 運動タブ：今日の日付を選択した状態で初期化
+  selectedExerciseDate = toDateStr(now);
+  renderDaySelector();
+  renderWeekSummary();
+
+  // 体重データ読み込み
+  const data = getWeightData();
+  if(data.length > 0) {
+    renderWeightHistory();
+  }
+
+  // 栄養サマリーの進捗も初期表示
+  const todayData = data.find(d => d.date === toDateStr(now));
+  if(todayData) { updateWeightProgress(todayData.weight); }
+});
+</script>
+<!-- PWA: Service Worker 登録 -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('[SW] registered:', reg.scope))
+      .catch(err => console.warn('[SW] registration failed:', err));
+  });
+}
+</script>
+</body>
+</html>.app { max-width: 480px; margin: 0 auto; padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+
+/* タブバー */
+.tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px 10px; cursor: pointer; font-size: 10px; color: var(--text3); gap: 3px; border: none; background: none; }
+.tab-item.active { color: var(--accent); }
 .tab-icon { font-size: 22px; line-height: 1; }
 
 /* タブコンテンツ */
