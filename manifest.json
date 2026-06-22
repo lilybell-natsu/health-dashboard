@@ -1,0 +1,25 @@
+{
+  "name": "健康管理ダッシュボード",
+  "short_name": "HealthDash",
+  "description": "食事・運動・体重を管理するパーソナルヘルスダッシュボード",
+  "start_url": "./health_dashboard.html",
+  "display": "standalone",
+  "background_color": "#f8f8f6",
+  "theme_color": "#1D9E75",
+  "orientation": "portrait",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
