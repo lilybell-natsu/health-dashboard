@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>健康管理ダッシュボード</title>
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
@@ -33,11 +33,11 @@
   --radius: 12px;
   --radius-sm: 8px;
 }
-body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; min-height: 100vh; }
-.app { max-width: 480px; margin: 0 auto; padding-bottom: 80px; }
+body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; min-height: 100svh; }
+.app { max-width: 480px; margin: 0 auto; padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
 /* タブバー */
-.tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid var(--border); display: flex; z-index: 100; }
+.tab-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: #fff; border-top: 1px solid var(--border); display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
 .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px 10px; cursor: pointer; font-size: 10px; color: var(--text3); gap: 3px; border: none; background: none; }
 .tab-item.active { color: var(--accent); }
 .tab-icon { font-size: 22px; line-height: 1; }
@@ -260,30 +260,30 @@ canvas { width: 100% !important; }
     <div class="metrics" id="today-metrics">
       <div class="metric-card">
         <div class="metric-label">摂取カロリー</div>
-        <div class="metric-value metric-good" id="today-kcal">−</div>
-        <div class="metric-sub">目標 2,000〜2,200 kcal</div>
+        <div class="metric-value metric-good" id="today-kcal">?</div>
+        <div class="metric-sub">目標 2,000?2,200 kcal</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">たんぱく質</div>
-        <div class="metric-value metric-good" id="today-protein">−</div>
-        <div class="metric-sub" id="today-protein-sub">目標 110〜130g</div>
+        <div class="metric-value metric-good" id="today-protein">?</div>
+        <div class="metric-sub" id="today-protein-sub">目標 110?130g</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">脂質</div>
-        <div class="metric-value metric-good" id="today-fat">−</div>
-        <div class="metric-sub" id="today-fat-sub">目標 60〜70g</div>
+        <div class="metric-value metric-good" id="today-fat">?</div>
+        <div class="metric-sub" id="today-fat-sub">目標 60?70g</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">炭水化物</div>
-        <div class="metric-value metric-good" id="today-carb">−</div>
-        <div class="metric-sub" id="today-carb-sub">目標 260〜300g</div>
+        <div class="metric-value metric-good" id="today-carb">?</div>
+        <div class="metric-sub" id="today-carb-sub">目標 260?300g</div>
       </div>
     </div>
 
     <div class="progress-section">
       <div class="progress-card">
         <div class="progress-header">
-          <span class="progress-title">⚖️ 減量進捗</span>
+          <span class="progress-title">?? 減量進捗</span>
           <span class="progress-pct" id="weight-pct">0%</span>
         </div>
         <div class="progress-bar">
@@ -333,49 +333,49 @@ canvas { width: 100% !important; }
     </div>
 
     <div class="section">
-      <div class="section-title">🍽️ 食事</div>
+      <div class="section-title"> ? 食事</div>
       <div class="todo-item" data-todo-id="meal-breakfast" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">朝食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
       <div class="todo-item" data-todo-id="meal-lunch" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">昼食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
       <div class="todo-item" data-todo-id="meal-snack" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">間食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
       <div class="todo-item" data-todo-id="meal-dinner" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">夕食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-title">💊 サプリ</div>
+      <div class="section-title">  サプリ</div>
       <div class="todo-item" data-todo-id="supple-vitd" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">DHC ビタミンD（朝食と一緒）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
       </div>
       <div class="todo-item" data-todo-id="supple-iron" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">DHC 鉄＋葉酸＋亜鉛グミ（昼食後）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-title">🏃 運動・健康</div>
+      <div class="section-title">  運動・健康</div>
       <div class="todo-item" data-todo-id="exercise-today" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">今日の運動を実施する</div><div class="todo-category" style="color:var(--amber)">運動</div></div>
       </div>
       <div class="todo-item" data-todo-id="health-water" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">水分補給（水1L・麦茶1L）</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
       </div>
       <div class="todo-item" data-todo-id="health-weight" onclick="toggleTodo(this)">
-        <div class="todo-check">✓</div>
+        <div class="todo-check">?</div>
         <div><div class="todo-text">体重を記録する</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
       </div>
     </div>
@@ -396,16 +396,16 @@ canvas { width: 100% !important; }
     <div class="section"><div class="section-title">この日のメニューを選ぶ</div></div>
     <div id="menu-picker"></div>
 
-    <div class="section"><div class="section-title">📅 今週のまとめ</div></div>
+    <div class="section"><div class="section-title">  今週のまとめ</div></div>
     <div id="week-summary"></div>
 
     <div class="section">
-      <div class="section-title">🫀 心拍ゾーン（最大心拍数 193bpm）</div>
+      <div class="section-title">  心拍ゾーン（最大心拍数 193bpm）</div>
     </div>
     <div class="zone-table">
-      <div class="zone-row"><span class="zone-name">LSD（軽め）</span><span class="zone-bpm">116〜135 bpm</span></div>
-      <div class="zone-row"><span class="zone-name">テンポ走</span><span class="zone-bpm">135〜154 bpm</span></div>
-      <div class="zone-row"><span class="zone-name">インターバル</span><span class="zone-bpm">164〜174 bpm</span></div>
+      <div class="zone-row"><span class="zone-name">LSD（軽め）</span><span class="zone-bpm">116?135 bpm</span></div>
+      <div class="zone-row"><span class="zone-name">テンポ走</span><span class="zone-bpm">135?154 bpm</span></div>
+      <div class="zone-row"><span class="zone-name">インターバル</span><span class="zone-bpm">164?174 bpm</span></div>
     </div>
   </div>
 
@@ -413,7 +413,7 @@ canvas { width: 100% !important; }
   <div class="tab-content" id="tab-meal">
     <div class="page-header">
       <h1>食事プラン</h1>
-      <p id="meal-tab-subtitle">1日合計 − kcal</p>
+      <p id="meal-tab-subtitle">1日合計 ? kcal</p>
     </div>
 
     <div class="section">
@@ -447,8 +447,8 @@ canvas { width: 100% !important; }
     <div class="goal-progress-card">
       <div class="goal-row"><span class="goal-label">開始体重</span><span class="goal-value">73.0 kg</span></div>
       <div class="goal-row"><span class="goal-label">目標体重</span><span class="goal-value">65.0 kg</span></div>
-      <div class="goal-row"><span class="goal-label">現在体重</span><span class="goal-value" id="current-weight-display">−</span></div>
-      <div class="goal-row"><span class="goal-label">残り</span><span class="goal-value" id="remaining-weight">−</span></div>
+      <div class="goal-row"><span class="goal-label">現在体重</span><span class="goal-value" id="current-weight-display">?</span></div>
+      <div class="goal-row"><span class="goal-label">残り</span><span class="goal-value" id="remaining-weight">?</span></div>
       <div style="margin-top:12px">
         <div class="progress-bar">
           <div class="progress-fill" id="goal-bar" style="width:0%"></div>
@@ -458,7 +458,7 @@ canvas { width: 100% !important; }
     </div>
 
     <div class="section">
-      <div class="section-title">📋 記録履歴</div>
+      <div class="section-title">  記録履歴</div>
     </div>
     <div class="weight-history" id="weight-history">
       <div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">まだ記録がありません</div>
@@ -474,50 +474,50 @@ canvas { width: 100% !important; }
   <div class="tab-content" id="tab-review">
     <div class="page-header">
       <h1>週間レビュー</h1>
-      <p id="review-period">−</p>
+      <p id="review-period">?</p>
     </div>
 
     <div class="week-nav">
-      <button class="week-nav-btn" onclick="changeReviewWeek(-1)">‹ 前の週</button>
+      <button class="week-nav-btn" onclick="changeReviewWeek(-1)">? 前の週</button>
       <button class="week-nav-btn" id="week-nav-current" onclick="changeReviewWeek(0)">今週</button>
-      <button class="week-nav-btn" id="week-nav-next" onclick="changeReviewWeek(1)">次の週 ›</button>
+      <button class="week-nav-btn" id="week-nav-next" onclick="changeReviewWeek(1)">次の週 ?</button>
     </div>
 
-    <div class="section"><div class="section-title">🏃 運動サマリー</div></div>
+    <div class="section"><div class="section-title">  運動サマリー</div></div>
     <div class="metrics" id="review-exercise-metrics"></div>
     <div id="review-exercise-chips" style="padding:0 16px 16px"></div>
 
-    <div class="section"><div class="section-title">⚖️ 体重の変化</div></div>
+    <div class="section"><div class="section-title">?? 体重の変化</div></div>
     <div class="goal-progress-card" id="review-weight-summary"></div>
 
-    <div class="section"><div class="section-title">📝 今週の総括</div></div>
+    <div class="section"><div class="section-title">  今週の総括</div></div>
     <div class="eval-card" id="review-overall"></div>
   </div>
 
   <!-- タブバー -->
   <div class="tab-bar">
     <button class="tab-item active" onclick="switchTab('today',this)">
-      <span class="tab-icon">📊</span>
+      <span class="tab-icon"> </span>
       <span>今日</span>
     </button>
     <button class="tab-item" onclick="switchTab('todo',this)">
-      <span class="tab-icon">✅</span>
+      <span class="tab-icon">?</span>
       <span>ToDo</span>
     </button>
     <button class="tab-item" onclick="switchTab('exercise',this)">
-      <span class="tab-icon">🏃</span>
+      <span class="tab-icon"> </span>
       <span>運動</span>
     </button>
     <button class="tab-item" onclick="switchTab('meal',this)">
-      <span class="tab-icon">🍽️</span>
+      <span class="tab-icon"> ?</span>
       <span>食事</span>
     </button>
     <button class="tab-item" onclick="switchTab('weight',this)">
-      <span class="tab-icon">⚖️</span>
+      <span class="tab-icon">??</span>
       <span>体重</span>
     </button>
     <button class="tab-item" onclick="switchTab('review',this)">
-      <span class="tab-icon">📈</span>
+      <span class="tab-icon"> </span>
       <span>レビュー</span>
     </button>
   </div>
@@ -529,38 +529,38 @@ const START_WEIGHT = 73.0;
 const GOAL_WEIGHT = 65.0;
 
 const WORKOUTS = [
-  { day:'月', icon:'🏃', type:'run',      badge:'badge-run',      label:'ランニング（LSD）',    sub:'6〜8km / ゆっくりペース',  kcal:'420〜560 kcal', items:[
+  { day:'月', icon:' ', type:'run',      badge:'badge-run',      label:'ランニング（LSD）',    sub:'6?8km / ゆっくりペース',  kcal:'420?560 kcal', items:[
     {name:'ウォームアップ', detail:'歩き5分'},
-    {name:'LSDラン', detail:'6〜8km / 心拍116〜135bpm'},
+    {name:'LSDラン', detail:'6?8km / 心拍116?135bpm'},
     {name:'クールダウン', detail:'歩き5分・ストレッチ'},
   ]},
-  { day:'火', icon:'💪', type:'strength', badge:'badge-strength', label:'自重筋トレ',            sub:'6種目 / 約40〜50分',       kcal:'150〜200 kcal', items:[
-    {name:'プッシュアップ', detail:'3セット × 15〜20回'},
+  { day:'火', icon:' ', type:'strength', badge:'badge-strength', label:'自重筋トレ',            sub:'6種目 / 約40?50分',       kcal:'150?200 kcal', items:[
+    {name:'プッシュアップ', detail:'3セット × 15?20回'},
     {name:'スクワット', detail:'3セット × 20回'},
     {name:'ランジ', detail:'各脚3セット × 12回'},
     {name:'プランク', detail:'3セット × 60秒'},
     {name:'バーピー', detail:'3セット × 10回'},
     {name:'マウンテンクライマー', detail:'3セット × 20回'},
   ]},
-  { day:'水', icon:'🏃', type:'run',      badge:'badge-run',      label:'ランニング（テンポ）',  sub:'8〜10km / ハードペース',    kcal:'560〜700 kcal', items:[
+  { day:'水', icon:' ', type:'run',      badge:'badge-run',      label:'ランニング（テンポ）',  sub:'8?10km / ハードペース',    kcal:'560?700 kcal', items:[
     {name:'ウォームアップ', detail:'歩き5分'},
-    {name:'テンポ走', detail:'8〜10km / 心拍135〜154bpm'},
+    {name:'テンポ走', detail:'8?10km / 心拍135?154bpm'},
     {name:'クールダウン', detail:'歩き5分・ストレッチ'},
   ]},
-  { day:'木', icon:'🚶', type:'rest',     badge:'badge-rest',     label:'休養 or ウォーキング', sub:'30分 / 軽め',               kcal:'100〜150 kcal', items:[
+  { day:'木', icon:' ', type:'rest',     badge:'badge-rest',     label:'休養 or ウォーキング', sub:'30分 / 軽め',               kcal:'100?150 kcal', items:[
     {name:'ウォーキング', detail:'30分 / ゆっくりペース'},
-    {name:'ストレッチ', detail:'10〜15分'},
+    {name:'ストレッチ', detail:'10?15分'},
   ]},
-  { day:'金', icon:'🔥', type:'combo',    badge:'badge-combo',    label:'筋トレ＋ランニング',    sub:'筋トレ後 5km ラン',          kcal:'350〜450 kcal', items:[
+  { day:'金', icon:' ', type:'combo',    badge:'badge-combo',    label:'筋トレ＋ランニング',    sub:'筋トレ後 5km ラン',          kcal:'350?450 kcal', items:[
     {name:'自重筋トレ', detail:'火曜と同じ6種目'},
     {name:'ランニング', detail:'5km / テンポ走'},
   ]},
-  { day:'土', icon:'🏃', type:'run',      badge:'badge-run',      label:'ロングラン',            sub:'12〜16km / LSDペース',      kcal:'840〜1,120 kcal', items:[
+  { day:'土', icon:' ', type:'run',      badge:'badge-run',      label:'ロングラン',            sub:'12?16km / LSDペース',      kcal:'840?1,120 kcal', items:[
     {name:'ウォームアップ', detail:'歩き5分'},
-    {name:'ロングラン', detail:'12〜16km / 心拍116〜135bpm'},
+    {name:'ロングラン', detail:'12?16km / 心拍116?135bpm'},
     {name:'クールダウン', detail:'歩き10分・入念ストレッチ'},
   ]},
-  { day:'日', icon:'😴', type:'rest',     badge:'badge-rest',     label:'完全休養',              sub:'身体を休める日',             kcal:'0 kcal', items:[
+  { day:'日', icon:' ', type:'rest',     badge:'badge-rest',     label:'完全休養',              sub:'身体を休める日',             kcal:'0 kcal', items:[
     {name:'完全オフ', detail:'翌週に向けて回復'},
   ]},
 ];
@@ -568,7 +568,7 @@ const WORKOUTS = [
 // ========== 基本食事プラン（固定ベース） ==========
 const BASE_MEALS = [
   {
-    id: 'breakfast', icon: '🌅', label: '朝食',
+    id: 'breakfast', icon: ' ', label: '朝食',
     summary: 'プロテイン・野菜ジュース・チョコラBB',
     kcal: 476,
     protein: 44.0, fat: 9.5, carb: 59.0,
@@ -579,18 +579,18 @@ const BASE_MEALS = [
     ]
   },
   {
-    id: 'lunch', icon: '☀️', label: '昼食',
+    id: 'lunch', icon: '??', label: '昼食',
     summary: '白米 + キーマカレー + 味噌汁',
     kcal: 515,
     protein: 15.0, fat: 10.5, carb: 90.0,
     items: [
       { name: '白米 200g', kcal: 330 },
-      { name: '咖喱屋キーマカレー中辛 150g', kcal: 150 },
+      { name: '??屋キーマカレー中辛 150g', kcal: 150 },
       { name: 'インスタント味噌汁 1杯', kcal: 35 },
     ]
   },
   {
-    id: 'snack', icon: '🍫', label: '間食',
+    id: 'snack', icon: ' ', label: '間食',
     summary: 'バランスパワー + プロテイン',
     kcal: 505,
     protein: 38.5, fat: 19.0, carb: 43.0,
@@ -600,7 +600,7 @@ const BASE_MEALS = [
     ]
   },
   {
-    id: 'dinner', icon: '🌙', label: '夕食',
+    id: 'dinner', icon: ' ', label: '夕食',
     summary: '鶏もも + そば + 納豆 + 卵 + キムチ',
     kcal: 714,
     protein: 50.0, fat: 25.5, carb: 89.7,
@@ -684,7 +684,7 @@ function saveWeightData(data) {
 }
 
 // ========== 運動記録データ（localStorage） ==========
-// { "YYYY-MM-DD": 0〜6（WORKOUTSのインデックス） または "none"（運動なし） }
+// { "YYYY-MM-DD": 0?6（WORKOUTSのインデックス） または "none"（運動なし） }
 function getExerciseLog() {
   try { return JSON.parse(localStorage.getItem('exerciseLog') || '{}'); } catch(e) { return {}; }
 }
@@ -846,7 +846,7 @@ function renderMealTab() {
   ].map(n => {
     const pct = Math.min(100, Math.round((n.val / n.target) * 100));
     const ok = n.val >= MEAL_TARGETS[n.key]?.min && n.val <= n.target * 1.15;
-    const mark = ok ? '✅' : (n.val < (MEAL_TARGETS[n.key]?.min || 0) ? '⚠️' : '↑');
+    const mark = ok ? '?' : (n.val < (MEAL_TARGETS[n.key]?.min || 0) ? '??' : '↑');
     return `<div class="nutrient-row">
       <div class="nutrient-header"><span class="nutrient-name">${n.label}</span><span class="nutrient-val">${n.val.toFixed(1)}${n.unit} / 目標${n.target}${n.unit} ${mark}</span></div>
       <div class="nutrient-bar"><div class="nutrient-fill" style="width:${pct}%;background:${barColors[n.key]}"></div></div>
@@ -858,11 +858,11 @@ function renderMealTab() {
   const todayMealDate = mealTabDate;
   let html = `<div class="meal-override-bar">
     <span class="meal-override-label">
-      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer" onclick="mealTabDate='${prevStr}';renderMealTab()">‹</button>
+      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer" onclick="mealTabDate='${prevStr}';renderMealTab()">?</button>
       &nbsp;${label}&nbsp;
-      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer;${mealTabDate >= todayStr ? 'opacity:0.3;pointer-events:none' : ''}" onclick="mealTabDate='${nextStr}';renderMealTab()">›</button>
+      <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer;${mealTabDate >= todayStr ? 'opacity:0.3;pointer-events:none' : ''}" onclick="mealTabDate='${nextStr}';renderMealTab()">?</button>
     </span>
-    ${hasAnyOverride ? '<span style="font-size:11px;color:var(--amber)">⚡ スポット変更あり</span>' : '<span style="font-size:11px;color:var(--text3)">基本プラン</span>'}
+    ${hasAnyOverride ? '<span style="font-size:11px;color:var(--amber)">? スポット変更あり</span>' : '<span style="font-size:11px;color:var(--text3)">基本プラン</span>'}
   </div>`;
 
   meals.forEach(m => {
@@ -891,14 +891,14 @@ function renderMealTab() {
       const bm = BASE_MEALS.find(b => b.id === m.id);
       const cur = m.ov || {};
       html += `<div class="meal-edit-form" id="edit-form-${m.id}">
-        <div style="font-size:12px;color:var(--text2);margin-bottom:10px">この食事の内容を概算で変更します。食品名を入力して🔍で栄養素を自動検索できます。</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px">この食事の内容を概算で変更します。食品名を入力して で栄養素を自動検索できます。</div>
         <div class="meal-edit-row">
           <span class="meal-edit-label">内容</span>
           <input class="meal-edit-name" id="edit-name-${m.id}" placeholder="${bm.summary}" value="${cur.name||''}">
         </div>
         <div class="meal-edit-row" style="justify-content:flex-end">
           <button class="meal-search-btn" id="search-btn-${m.id}" onclick="searchNutrition('${m.id}')">
-            🔍 栄養素を検索
+              栄養素を検索
           </button>
         </div>
         <div id="search-result-${m.id}"></div>
@@ -950,7 +950,7 @@ async function searchNutrition(mealId) {
   const resultEl = document.getElementById(`search-result-${mealId}`);
 
   btn.disabled  = true;
-  btn.innerHTML = '<span class="spin">⟳</span> 検索中…';
+  btn.innerHTML = '<span class="spin">?</span> 検索中…';
   resultEl.innerHTML = '';
 
   const prompt = `次の食品・料理について、日本の一般的な1食分（または記載量）あたりのカロリーと栄養素を調べてください。
@@ -1006,7 +1006,7 @@ async function searchNutrition(mealId) {
     const source = nutrition.source ? `出典：${nutrition.source}` : '';
     resultEl.innerHTML = `
       <div style="background:var(--green-bg);border:1px solid var(--green);border-radius:6px;padding:8px 12px;margin-bottom:8px">
-        <span style="font-size:12px;font-weight:600;color:var(--green)">✓ AI概算で入力しました</span>
+        <span style="font-size:12px;font-weight:600;color:var(--green)">? AI概算で入力しました</span>
         <span class="ai-badge">AI概算</span>
         <div class="search-result-note">${note}${note && source ? '　' : ''}${source}<br>数値は概算です。必要に応じて修正してから保存してください。</div>
       </div>`;
@@ -1016,7 +1016,7 @@ async function searchNutrition(mealId) {
     resultEl.innerHTML = `<div class="search-error-note">検索に失敗しました（${e.message}）。手動で入力してください。</div>`;
   } finally {
     btn.disabled  = false;
-    btn.innerHTML = '🔍 栄養素を検索';
+    btn.innerHTML = '  栄養素を検索';
   }
 }
 
@@ -1090,7 +1090,7 @@ function renderTodayMeals() {
     const el  = document.getElementById(elId);
     const sub = subId ? document.getElementById(subId) : null;
     if(!anyChecked) {
-      el.textContent = '−';
+      el.textContent = '?';
       el.className = 'metric-value metric-pending';
       if(sub) sub.textContent = label;
       return;
@@ -1103,17 +1103,17 @@ function renderTodayMeals() {
               : 'metric-good';
     el.className = `metric-value ${cls}`;
     if(sub) {
-      const mark = value >= min && value <= max * 1.15 ? '✓' : (value < min ? '⚠' : '↑');
+      const mark = value >= min && value <= max * 1.15 ? '?' : (value < min ? '?' : '↑');
       sub.textContent = unit === 'kcal'
-        ? `目標 2,000〜2,200 kcal`
-        : `目標 ${min}〜${max}${unit} ${mark}`;
+        ? `目標 2,000?2,200 kcal`
+        : `目標 ${min}?${max}${unit} ${mark}`;
     }
   };
 
-  setMetric('today-kcal',    null,              kcal,    'kcal', 2000, 2200, '目標 2,000〜2,200 kcal');
-  setMetric('today-protein', 'today-protein-sub', protein, 'g', 110, 130,  '目標 110〜130g');
-  setMetric('today-fat',     'today-fat-sub',     fat,     'g', 60,  70,   '目標 60〜70g');
-  setMetric('today-carb',    'today-carb-sub',    carb,    'g', 260, 300,  '目標 260〜300g');
+  setMetric('today-kcal',    null,              kcal,    'kcal', 2000, 2200, '目標 2,000?2,200 kcal');
+  setMetric('today-protein', 'today-protein-sub', protein, 'g', 110, 130,  '目標 110?130g');
+  setMetric('today-fat',     'today-fat-sub',     fat,     'g', 60,  70,   '目標 60?70g');
+  setMetric('today-carb',    'today-carb-sub',    carb,    'g', 260, 300,  '目標 260?300g');
 
   // metric-card 全体の pending クラス
   document.querySelectorAll('#today-metrics .metric-card').forEach(card => {
@@ -1141,7 +1141,7 @@ function renderTodayExercise() {
   if(workoutId === 'none') {
     container.innerHTML = `<div class="today-exercise-card no-record">
       <div>
-        <div class="today-exercise-name">🚶 運動なし</div>
+        <div class="today-exercise-name">  運動なし</div>
         <div class="today-exercise-sub">この日は運動を行いませんでした</div>
       </div>
       <div class="today-exercise-kcal">0 kcal</div>
@@ -1152,7 +1152,7 @@ function renderTodayExercise() {
   const w = WORKOUTS[workoutId];
   container.innerHTML = `<div class="today-exercise-card has-record">
     <div>
-      <div class="today-exercise-name">${w.icon || '🏃'} ${w.label}</div>
+      <div class="today-exercise-name">${w.icon || ' '} ${w.label}</div>
       <div class="today-exercise-sub">${w.sub}</div>
     </div>
     <div class="today-exercise-kcal">${w.kcal}</div>
@@ -1249,7 +1249,7 @@ function renderMenuPicker() {
         <div class="menu-option-sub">${w.sub} ・ ${w.kcal}</div>
         <div class="menu-option-ref">目安：${w.day}曜日のメニュー</div>
       </div>
-      ${current === idx ? '<span class="menu-option-check">✓</span>' : ''}
+      ${current === idx ? '<span class="menu-option-check">?</span>' : ''}
     </div>`).join('');
   const noneHtml = `
     <div class="menu-option ${current === 'none' ? 'selected' : ''}" onclick="chooseWorkout('none')">
@@ -1257,7 +1257,7 @@ function renderMenuPicker() {
         <span class="workout-badge badge-rest" style="margin-bottom:0">運動なし</span>
         <div class="menu-option-sub">この日は実施しなかった</div>
       </div>
-      ${current === 'none' ? '<span class="menu-option-check">✓</span>' : ''}
+      ${current === 'none' ? '<span class="menu-option-check">?</span>' : ''}
     </div>`;
   document.getElementById('menu-picker').innerHTML = optionsHtml + noneHtml;
 }
@@ -1330,7 +1330,7 @@ function evaluateWeek(stats) {
     messages.push('運動した日が少なめの1週間でした。無理のない範囲で、運動する日を少しずつ増やしてみましょう。');
   } else {
     level = 'warn';
-    messages.push('まずまずのペースです。あと1〜2日運動を増やせると、さらに効果が高まります。');
+    messages.push('まずまずのペースです。あと1?2日運動を増やせると、さらに効果が高まります。');
   }
 
   if(stats.runCount > 0 && stats.strengthCount === 0 && stats.comboCount === 0) {
@@ -1364,7 +1364,7 @@ function renderWeekSummary() {
     <div class="zone-table" style="margin-bottom:14px">${rows}</div>
     <div class="metrics" style="padding:0 16px 14px">
       <div class="metric-card"><div class="metric-label">運動した日数</div><div class="metric-value">${stats.activeCount} / 7日</div></div>
-      <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}〜${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>
+      <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}?${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>
     </div>
     <div class="eval-card eval-${evalResult.level}">
       <div class="eval-label">効果の評価</div>
@@ -1393,7 +1393,7 @@ function renderReviewTab() {
   sunday.setDate(monday.getDate() + 6);
 
   document.getElementById('review-period').textContent =
-    `${monday.getFullYear()}年${monday.getMonth()+1}月${monday.getDate()}日 〜 ${sunday.getMonth()+1}月${sunday.getDate()}日`;
+    `${monday.getFullYear()}年${monday.getMonth()+1}月${monday.getDate()}日 ? ${sunday.getMonth()+1}月${sunday.getDate()}日`;
 
   document.getElementById('week-nav-current').classList.toggle('current', reviewWeekOffset === 0);
   document.getElementById('week-nav-next').classList.toggle('disabled', reviewWeekOffset === 0);
@@ -1405,15 +1405,15 @@ function renderReviewTab() {
 
   document.getElementById('review-exercise-metrics').innerHTML = `
     <div class="metric-card"><div class="metric-label">運動した日数</div><div class="metric-value">${stats.activeCount} / 7日</div></div>
-    <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}〜${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>`;
+    <div class="metric-card"><div class="metric-label">消費カロリー目安</div><div class="metric-value">${stats.kcalMin}?${stats.kcalMax}</div><div class="metric-sub">kcal</div></div>`;
 
   const chip = (label, count) => count > 0 ? `<span class="review-chip">${label} ${count}日</span>` : '';
   const chips = [
-    chip('🏃 ラン', stats.runCount),
-    chip('💪 筋トレ', stats.strengthCount),
-    chip('🔥 複合', stats.comboCount),
-    chip('🚶 休養系', stats.restCount),
-    chip('— 未実施', stats.noneCount),
+    chip('  ラン', stats.runCount),
+    chip('  筋トレ', stats.strengthCount),
+    chip('  複合', stats.comboCount),
+    chip('  休養系', stats.restCount),
+    chip('? 未実施', stats.noneCount),
   ].filter(Boolean).join(' ');
   document.getElementById('review-exercise-chips').innerHTML = chips || '<span style="font-size:12px;color:var(--text3)">記録がありません</span>';
 
