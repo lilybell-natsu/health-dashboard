@@ -41,7 +41,7 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 8px 4px 10px; cursor: pointer; font-size: 10px; color: var(--text3); gap: 3px; border: none; background: none; }
 .tab-item.active { color: var(--accent); }
 .tab-icon { font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; }
-.tab-icon svg { width: 24px; height: 24px; }
+.tab-icon svg { width: 24px; height: 24px; display: block; color: inherit; stroke: currentColor; }
 
 /* タブコンテンツ */
 .tab-content { display: none; }
@@ -125,6 +125,33 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 .zone-row:last-child { border-bottom: none; }
 .zone-name { font-weight: 500; }
 .zone-bpm { color: var(--text2); }
+
+/* 運動タブ：月間カレンダー */
+.calendar-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px 12px; }
+.calendar-month-label { font-size: 14px; font-weight: 600; }
+.calendar-nav { background: none; border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 13px; cursor: pointer; color: var(--text2); }
+.calendar-grid { margin: 0 16px 4px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.calendar-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border); }
+.calendar-dow { text-align: center; font-size: 10px; color: var(--text3); padding: 6px 0; }
+.calendar-dow:first-child { color: var(--red); }
+.calendar-dow:last-child { color: var(--blue); }
+.calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+.calendar-cell { text-align: center; padding: 6px 2px; font-size: 12px; color: var(--text2); position: relative; min-height: 36px; }
+.calendar-cell.today .cal-num { background: var(--accent); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+.calendar-cell.other-month { color: var(--text3); }
+.cal-num { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 12px; }
+.cal-dot { width: 6px; height: 6px; border-radius: 50%; margin: 1px auto 0; }
+.cal-dot.run      { background: var(--blue); }
+.cal-dot.strength { background: var(--amber); }
+.cal-dot.combo    { background: var(--green); }
+.cal-dot.rest     { background: #bbb; }
+.streak-card { margin: 8px 16px 4px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+.streak-num { font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1; }
+.streak-label { font-size: 13px; color: var(--text2); }
+.streak-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.calendar-toggle { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+.calendar-toggle-arrow { font-size: 11px; color: var(--text3); transition: transform 0.2s; }
+.calendar-toggle-arrow.open { transform: rotate(180deg); }
 
 /* 食事タブ */
 .nutrition-table { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); margin: 0 16px 12px; overflow: hidden; }
@@ -396,6 +423,36 @@ canvas { width: 100% !important; }
 
     <div class="section"><div class="section-title">この日のメニューを選ぶ</div></div>
     <div id="menu-picker"></div>
+
+    <div class="section">
+      <div class="section-title calendar-toggle" onclick="toggleExerciseCalendar()">
+        <span>  月間カレンダー</span>
+        <span class="calendar-toggle-arrow" id="calendar-arrow">▼</span>
+      </div>
+    </div>
+    <div id="exercise-calendar-wrap" style="display:none">
+      <div class="calendar-header">
+        <button class="calendar-nav" onclick="moveCalendarMonth(-1)">?</button>
+        <span class="calendar-month-label" id="calendar-month-label"></span>
+        <button class="calendar-nav" onclick="moveCalendarMonth(1)">?</button>
+      </div>
+      <div class="calendar-grid">
+        <div class="calendar-dow-row">
+          <div class="calendar-dow">日</div><div class="calendar-dow">月</div>
+          <div class="calendar-dow">火</div><div class="calendar-dow">水</div>
+          <div class="calendar-dow">木</div><div class="calendar-dow">金</div>
+          <div class="calendar-dow">土</div>
+        </div>
+        <div class="calendar-days" id="calendar-days"></div>
+      </div>
+      <div class="streak-card">
+        <div class="streak-num" id="streak-num">0</div>
+        <div>
+          <div class="streak-label">日連続で運動記録中  </div>
+          <div class="streak-sub" id="streak-sub"></div>
+        </div>
+      </div>
+    </div>
 
     <div class="section"><div class="section-title">  今週のまとめ</div></div>
     <div id="week-summary"></div>
@@ -764,7 +821,7 @@ function switchTab(name, btn) {
   document.getElementById('tab-' + name).classList.add('active');
   btn.classList.add('active');
   if(name === 'weight')   renderWeightHistory();
-  if(name === 'exercise') { renderDaySelector(); renderWeekSummary(); }
+  if(name === 'exercise') { calendarMonth = new Date(); renderDaySelector(); renderWeekSummary(); }
   if(name === 'meal')     renderMealTab();
   if(name === 'review')   renderReviewTab();
   if(name === 'today')    renderTodayMeals();
@@ -1192,6 +1249,80 @@ function renderTodayExercise() {
 
 // ========== 運動：日付選択 ==========
 let selectedExerciseDate = null; // 運動タブで現在選択中の日付 "YYYY-MM-DD"
+let calendarMonth = new Date(); // カレンダーの表示月
+
+// ========== 運動タブ：月間カレンダー ==========
+function toggleExerciseCalendar() {
+  const wrap  = document.getElementById('exercise-calendar-wrap');
+  const arrow = document.getElementById('calendar-arrow');
+  const open  = wrap.style.display === 'none';
+  wrap.style.display = open ? 'block' : 'none';
+  arrow.classList.toggle('open', open);
+  if (open) renderExerciseCalendar();
+}
+
+function moveCalendarMonth(delta) {
+  calendarMonth = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth() + delta, 1);
+  renderExerciseCalendar();
+}
+
+function renderExerciseCalendar() {
+  const log   = getExerciseLog();
+  const today = toDateStr(new Date());
+  const year  = calendarMonth.getFullYear();
+  const month = calendarMonth.getMonth();
+
+  document.getElementById('calendar-month-label').textContent =
+    `${year}年${month + 1}月`;
+
+  const firstDow    = new Date(year, month, 1).getDay(); // 0=日
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let html = '';
+  // 前月の空白セル
+  for (let i = 0; i < firstDow; i++) {
+    html += '<div class="calendar-cell other-month"></div>';
+  }
+  // 当月セル
+  for (let d = 1; d <= daysInMonth; d++) {
+    const ds = `${year}-${String(month + 1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = ds === today;
+    const rec = log[ds];
+    let dotHtml = '';
+    if (rec !== undefined && rec !== 'none') {
+      const w = WORKOUTS[rec];
+      if (w) dotHtml = `<div class="cal-dot ${w.type}"></div>`;
+    } else if (rec === 'none') {
+      dotHtml = '<div class="cal-dot rest"></div>';
+    }
+    html += `<div class="calendar-cell${isToday ? ' today' : ''}">
+      <div class="cal-num">${d}</div>
+      ${dotHtml}
+    </div>`;
+  }
+  document.getElementById('calendar-days').innerHTML = html;
+
+  // ストリーク計算（運動記録がある日のみカウント、noneは除外）
+  let streak = 0;
+  const now = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(now);
+    d.setDate(now.getDate() - i);
+    const ds = toDateStr(d);
+    const rec = log[ds];
+    if (rec !== undefined && rec !== 'none') {
+      streak++;
+    } else {
+      // 今日まだ記録なしなら0日目としてスキップ、昨日以前なら終了
+      if (i > 0) break;
+    }
+  }
+  document.getElementById('streak-num').textContent = streak;
+  document.getElementById('streak-sub').textContent =
+    streak > 0
+      ? `最後の記録：${formatDateShort(toDateStr(new Date()))}` 
+      : '今日の運動を記録してストリークを始めよう';
+}
 
 function renderDaySelector() {
   const monday = getMonday(new Date());
@@ -1267,6 +1398,7 @@ function clearWorkoutRecord() {
   renderDaySelector();
   renderWeekSummary();
   if(selectedExerciseDate === toDateStr(new Date())) renderTodayExercise();
+  if(document.getElementById('exercise-calendar-wrap').style.display !== 'none') renderExerciseCalendar();
 }
 
 function renderMenuPicker() {
@@ -1298,6 +1430,7 @@ function chooseWorkout(id) {
   renderDaySelector();
   renderWeekSummary();
   if(selectedExerciseDate === toDateStr(new Date())) renderTodayExercise();
+  if(document.getElementById('exercise-calendar-wrap').style.display !== 'none') renderExerciseCalendar();
 }
 
 // ========== 運動：週間集計・効果評価 ==========
@@ -1570,7 +1703,7 @@ function renderWeightChart(data) {
     ctx.fillText(val.toFixed(1), pad.l-4, y+3);
   }
 
-  if(data.length < 2) { return; }
+  if(data.length < 1) { return; }
 
   // 目標ライン
   const goalY = pad.t + ch * (maxW - GOAL_WEIGHT) / (maxW - minW);
@@ -1580,23 +1713,31 @@ function renderWeightChart(data) {
   ctx.fillStyle = '#1D9E75'; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
   ctx.fillText('目標', pad.l+2, goalY-3);
 
-  // 体重折れ線
+  // 全データのx/y座標を計算
   const pts = data.map((d,i) => ({
-    x: pad.l + cw * i / (data.length-1),
+    x: pad.l + (data.length === 1 ? cw / 2 : cw * i / (data.length - 1)),
     y: pad.t + ch * (maxW - d.weight) / (maxW - minW)
   }));
-  ctx.strokeStyle = '#185FA5'; ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  pts.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
-  ctx.stroke();
 
-  // 7日移動平均線
+  // 7日ごとのデータポイントで折れ線を描画
+  const lineIndices = [];
+  for(let i = 0; i < pts.length; i++) {
+    if(i === 0 || i === pts.length - 1 || i % 7 === 0) lineIndices.push(i);
+  }
+  if(lineIndices.length >= 2) {
+    ctx.strokeStyle = '#185FA5'; ctx.lineWidth = 2; ctx.setLineDash([]);
+    ctx.beginPath();
+    lineIndices.forEach((idx, j) => j === 0 ? ctx.moveTo(pts[idx].x, pts[idx].y) : ctx.lineTo(pts[idx].x, pts[idx].y));
+    ctx.stroke();
+  }
+
+  // 7日移動平均線（8日分以上あるとき）
   const MA_WINDOW = 7;
   const maPoints = data.map((d, i) => {
     const slice = data.slice(Math.max(0, i - MA_WINDOW + 1), i + 1);
     const avg = slice.reduce((s, x) => s + x.weight, 0) / slice.length;
     return {
-      x: pad.l + cw * i / (data.length - 1),
+      x: pad.l + (data.length === 1 ? cw / 2 : cw * i / (data.length - 1)),
       y: pad.t + ch * (maxW - avg) / (maxW - minW)
     };
   }).filter((_, i) => i >= MA_WINDOW - 1);
@@ -1611,25 +1752,27 @@ function renderWeightChart(data) {
     ctx.setLineDash([]);
   }
 
-  // ポイント・日付（移動平均線の上に重ねる）
-  pts.forEach((p,i) => {
-    ctx.beginPath(); ctx.arc(p.x,p.y,4,0,Math.PI*2);
-    ctx.fillStyle = '#185FA5'; ctx.fill();
-    if(i===0 || i===pts.length-1) {
+  // 全日プロット（小さい点）
+  pts.forEach((p, i) => {
+    const isEdge = i === 0 || i === pts.length - 1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, isEdge ? 4 : 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#185FA5';
+    ctx.fill();
+    // 両端のみ日付ラベル
+    if(isEdge) {
       ctx.fillStyle = '#666'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText(formatDateShort(data[i].date), p.x, h-pad.b+14);
+      ctx.fillText(formatDateShort(data[i].date), p.x, h - pad.b + 14);
     }
   });
 
   // 凡例
   const legendX = w - pad.r - 2;
   const legendY = pad.t + 10;
-  // 体重ライン
-  ctx.strokeStyle = '#185FA5'; ctx.lineWidth = 2.5; ctx.setLineDash([]);
+  ctx.strokeStyle = '#185FA5'; ctx.lineWidth = 2; ctx.setLineDash([]);
   ctx.beginPath(); ctx.moveTo(legendX - 28, legendY); ctx.lineTo(legendX - 14, legendY); ctx.stroke();
   ctx.fillStyle = '#185FA5'; ctx.font = '9px sans-serif'; ctx.textAlign = 'right';
   ctx.fillText('体重', legendX, legendY + 3);
-  // 移動平均ライン（7日分以上あるときのみ）
   if (maPoints.length >= 2) {
     ctx.strokeStyle = '#E8873A'; ctx.lineWidth = 2; ctx.setLineDash([6, 3]);
     ctx.beginPath(); ctx.moveTo(legendX - 28, legendY + 14); ctx.lineTo(legendX - 14, legendY + 14); ctx.stroke();
