@@ -1005,7 +1005,22 @@ function switchMealPlan(planId) {
   renderTodayMeals();
 }
 
-function updatePlanToggleUI() {
+// プロテインをスポット変更として間食に追加
+function addProteinSnack(dateStr) {
+  setMealOverride(dateStr, 'snack', {
+    name: '自作プロテイン',
+    kcal: 410,
+    protein: 38.5,
+    fat: 9.0,
+    carb: 43.0,
+    note: 'ワンタップ追加'
+  });
+  mealEditOpen = null;
+  renderMealTab();
+  renderTodayMeals();
+}
+
+
   const planId = getActivePlanId();
   const btnDiet     = document.getElementById('plan-btn-diet');
   const btnMaintain = document.getElementById('plan-btn-maintain');
@@ -1106,6 +1121,18 @@ function renderMealTab() {
          ${m.ov.note ? `<div style="font-size:11px;color:var(--text3);padding:2px 0 0 0">${m.ov.note}</div>` : ''}`
       : m.items.map(i => `<div class="meal-detail-item"><span class="meal-detail-name">${i.name}</span><span class="meal-detail-kcal">${i.kcal}</span></div>`).join('');
 
+    // 維持期・間食・スポット変更なし の場合はプロテイン追加ボタンを表示
+    const isMaintainSnack = getActivePlanId() === 'maintain' && m.id === 'snack' && !m.overridden;
+    let proteinBtnHtml = '';
+    if(isMaintainSnack) {
+      proteinBtnHtml = `
+        <div style="margin-top:8px">
+          <button onclick="addProteinSnack('${todayMealDate}')" style="width:100%;padding:8px;border-radius:8px;border:2px dashed var(--accent);background:var(--green-bg);color:var(--accent);font-size:13px;font-weight:600;cursor:pointer">
+            + 自作プロテインを追加（+410kcal / P:38g）
+          </button>
+        </div>`;
+    }
+
     // 維持期・夕食・スポット変更なし の場合は残り栄養素アドバイスを表示
     const isMaintainDinner = getActivePlanId() === 'maintain' && m.id === 'dinner' && !m.overridden;
     let dinnerAdviceHtml = '';
@@ -1134,6 +1161,7 @@ function renderMealTab() {
         </span>
       </div>
       ${itemsHtml}
+      ${proteinBtnHtml}
       ${dinnerAdviceHtml}
     </div>`;
 
@@ -1598,7 +1626,9 @@ function chooseWorkout(id) {
 
 // ========== 運動：週間集計・効果評価 ==========
 function parseKcalRange(kcalStr) {
-  const nums = (kcalStr.match(/[\d,]+/g) || []).map(n => parseInt(n.replace(/,/g, ''), 10));
+  // &#xFF5E; や ? や ~ を区切り文字として扱い、カンマ付き数字を正しくパース
+  const normalized = kcalStr.replace(/&#xFF5E;|&#x301C;|?|~/g, '-').replace(/,/g, '');
+  const nums = (normalized.match(/\d+/g) || []).map(Number);
   if(nums.length === 0) return [0, 0];
   if(nums.length === 1) return [nums[0], nums[0]];
   return [nums[0], nums[1]];
@@ -1786,8 +1816,7 @@ function saveWeight() {
   data.sort((a,b) => a.date.localeCompare(b.date));
   saveWeightData(data);
   document.getElementById('weight-input').value = '';
-  renderWeightHistory();
-  updateWeightProgress(val);
+  renderWeightHistory(); // 最新日付の体重でupdateWeightProgressを呼ぶ
 }
 
 function updateWeightProgress(current) {
