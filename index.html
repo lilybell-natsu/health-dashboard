@@ -288,22 +288,22 @@ canvas { width: 100% !important; }
     <div class="metrics" id="today-metrics">
       <div class="metric-card">
         <div class="metric-label">摂取カロリー</div>
-        <div class="metric-value metric-good" id="today-kcal">?</div>
+        <div class="metric-value metric-good" id="today-kcal">−</div>
         <div class="metric-sub">目標 2,000&#xFF5E;2,200 kcal</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">たんぱく質</div>
-        <div class="metric-value metric-good" id="today-protein">?</div>
+        <div class="metric-value metric-good" id="today-protein">−</div>
         <div class="metric-sub" id="today-protein-sub">目標 110&#xFF5E;130g</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">脂質</div>
-        <div class="metric-value metric-good" id="today-fat">?</div>
+        <div class="metric-value metric-good" id="today-fat">−</div>
         <div class="metric-sub" id="today-fat-sub">目標 60&#xFF5E;70g</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">炭水化物</div>
-        <div class="metric-value metric-good" id="today-carb">?</div>
+        <div class="metric-value metric-good" id="today-carb">−</div>
         <div class="metric-sub" id="today-carb-sub">目標 260&#xFF5E;300g</div>
       </div>
     </div>
@@ -426,15 +426,15 @@ canvas { width: 100% !important; }
 
     <div class="section">
       <div class="section-title calendar-toggle" onclick="toggleExerciseCalendar()">
-        <span>  月間カレンダー</span>
+        <span>📅 月間カレンダー</span>
         <span class="calendar-toggle-arrow" id="calendar-arrow">▼</span>
       </div>
     </div>
     <div id="exercise-calendar-wrap" style="display:none">
       <div class="calendar-header">
-        <button class="calendar-nav" onclick="moveCalendarMonth(-1)">?</button>
+        <button class="calendar-nav" onclick="moveCalendarMonth(-1)">◀</button>
         <span class="calendar-month-label" id="calendar-month-label"></span>
-        <button class="calendar-nav" onclick="moveCalendarMonth(1)">?</button>
+        <button class="calendar-nav" onclick="moveCalendarMonth(1)">▶</button>
       </div>
       <div class="calendar-grid">
         <div class="calendar-dow-row">
@@ -454,7 +454,7 @@ canvas { width: 100% !important; }
       </div>
     </div>
 
-    <div class="section"><div class="section-title">  今週のまとめ</div></div>
+    <div class="section"><div class="section-title">📅 今週のまとめ</div></div>
     <div id="week-summary"></div>
 
     <div class="section">
@@ -471,7 +471,7 @@ canvas { width: 100% !important; }
   <div class="tab-content" id="tab-meal">
     <div class="page-header">
       <h1>食事プラン</h1>
-      <p id="meal-tab-subtitle">1日合計 ? kcal</p>
+      <p id="meal-tab-subtitle">1日合計 − kcal</p>
     </div>
 
     <!-- プラン切替トグル -->
@@ -514,8 +514,8 @@ canvas { width: 100% !important; }
     <div class="goal-progress-card">
       <div class="goal-row"><span class="goal-label">開始体重</span><span class="goal-value">73.0 kg</span></div>
       <div class="goal-row"><span class="goal-label">目標体重</span><span class="goal-value">65.0 kg</span></div>
-      <div class="goal-row"><span class="goal-label">現在体重</span><span class="goal-value" id="current-weight-display">?</span></div>
-      <div class="goal-row"><span class="goal-label">残り</span><span class="goal-value" id="remaining-weight">?</span></div>
+      <div class="goal-row"><span class="goal-label">現在体重</span><span class="goal-value" id="current-weight-display">−</span></div>
+      <div class="goal-row"><span class="goal-label">残り</span><span class="goal-value" id="remaining-weight">−</span></div>
       <div style="margin-top:12px">
         <div class="progress-bar">
           <div class="progress-fill" id="goal-bar" style="width:0%"></div>
@@ -525,7 +525,7 @@ canvas { width: 100% !important; }
     </div>
 
     <div class="section">
-      <div class="section-title">  記録履歴</div>
+      <div class="section-title">📋 記録履歴</div>
     </div>
     <div class="weight-history" id="weight-history">
       <div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">まだ記録がありません</div>
@@ -541,7 +541,7 @@ canvas { width: 100% !important; }
   <div class="tab-content" id="tab-review">
     <div class="page-header">
       <h1>週間レビュー</h1>
-      <p id="review-period">?</p>
+      <p id="review-period">−</p>
     </div>
 
     <div class="week-nav">
@@ -557,7 +557,7 @@ canvas { width: 100% !important; }
     <div class="section"><div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><rect x="18" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><rect x="76" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><path d="M58 64h12" stroke="#3E6B73" stroke-width="4"/><path d="M68 58l6 6-6 6" fill="none" stroke="#3E6B73" stroke-width="4"/></svg></span> 体重の変化</div></div>
     <div class="goal-progress-card" id="review-weight-summary"></div>
 
-    <div class="section"><div class="section-title">  今週の総括</div></div>
+    <div class="section"><div class="section-title">📝 今週の総括</div></div>
     <div class="eval-card" id="review-overall"></div>
   </div>
 
@@ -792,10 +792,6 @@ function getMealTargets() {
   return getActivePlan().targets;
 }
 
-// 後方互換（既存コードがBASE_MEALS/MEAL_TARGETSを参照している箇所用）
-const BASE_MEALS   = null; // 使用禁止・getBaseMeals()を使うこと
-const MEAL_TARGETS = null; // 使用禁止・getMealTargets()を使うこと
-
 
 // ========== 食事スポット変更ログ（localStorage） ==========
 // { "YYYY-MM-DD": { "breakfast": { name:"...", kcal:000, note:"..." }, ... } }
@@ -1021,6 +1017,7 @@ function addProteinSnack(dateStr) {
 }
 
 
+function updatePlanToggleUI() {
   const planId = getActivePlanId();
   const btnDiet     = document.getElementById('plan-btn-diet');
   const btnMaintain = document.getElementById('plan-btn-maintain');
@@ -1108,7 +1105,7 @@ function renderMealTab() {
       &nbsp;${label}&nbsp;
       <button style="padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:var(--card);font-size:12px;cursor:pointer;${mealTabDate >= todayStr ? 'opacity:0.3;pointer-events:none' : ''}" onclick="mealTabDate='${nextStr}';renderMealTab()">&raquo;</button>
     </span>
-    ${hasAnyOverride ? '<span style="font-size:11px;color:var(--amber)">? スポット変更あり</span>' : '<span style="font-size:11px;color:var(--text3)">基本プラン</span>'}
+    ${hasAnyOverride ? '<span style="font-size:11px;color:var(--amber)">⚡ スポット変更あり</span>' : '<span style="font-size:11px;color:var(--text3)">基本プラン</span>'}
   </div>`;
 
   meals.forEach(m => {
@@ -1169,14 +1166,14 @@ function renderMealTab() {
       const bm = getBaseMeals().find(b => b.id === m.id);
       const cur = m.ov || {};
       html += `<div class="meal-edit-form" id="edit-form-${m.id}">
-        <div style="font-size:12px;color:var(--text2);margin-bottom:10px">この食事の内容を概算で変更します。食品名を入力して で栄養素を自動検索できます。</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:10px">この食事の内容を概算で変更します。食品名を入力して🔍で栄養素を自動検索できます。</div>
         <div class="meal-edit-row">
           <span class="meal-edit-label">内容</span>
           <input class="meal-edit-name" id="edit-name-${m.id}" placeholder="${bm.summary}" value="${cur.name||''}">
         </div>
         <div class="meal-edit-row" style="justify-content:flex-end">
           <button class="meal-search-btn" id="search-btn-${m.id}" onclick="searchNutrition('${m.id}')">
-              栄養素を検索
+            🔍 栄養素を検索
           </button>
         </div>
         <div id="search-result-${m.id}"></div>
@@ -1228,7 +1225,7 @@ async function searchNutrition(mealId) {
   const resultEl = document.getElementById(`search-result-${mealId}`);
 
   btn.disabled  = true;
-  btn.innerHTML = '<span class="spin">?</span> 検索中…';
+  btn.innerHTML = '<span class="spin">⟳</span> 検索中…';
   resultEl.innerHTML = '';
 
   const prompt = `次の食品・料理について、日本の一般的な1食分（または記載量）あたりのカロリーと栄養素を調べてください。
@@ -1294,7 +1291,7 @@ async function searchNutrition(mealId) {
     resultEl.innerHTML = `<div class="search-error-note">検索に失敗しました（${e.message}）。手動で入力してください。</div>`;
   } finally {
     btn.disabled  = false;
-    btn.innerHTML = '  栄養素を検索';
+    btn.innerHTML = '🔍 栄養素を検索';
   }
 }
 
@@ -1368,7 +1365,7 @@ function renderTodayMeals() {
     const el  = document.getElementById(elId);
     const sub = subId ? document.getElementById(subId) : null;
     if(!anyChecked) {
-      el.textContent = '?';
+      el.textContent = '−';
       el.className = 'metric-value metric-pending';
       if(sub) sub.textContent = label;
       return;
@@ -1381,7 +1378,7 @@ function renderTodayMeals() {
               : 'metric-good';
     el.className = `metric-value ${cls}`;
     if(sub) {
-      const mark = value >= min && value <= max * 1.15 ? '?' : (value < min ? '?' : '↑');
+      const mark = value >= min && value <= max * 1.15 ? '✔' : (value < min ? '⚠' : '↑');
       sub.textContent = unit === 'kcal'
         ? `目標 2,000&#xFF5E;2,200 kcal`
         : `目標 ${min}&#xFF5E;${max}${unit} ${mark}`;
@@ -1626,8 +1623,8 @@ function chooseWorkout(id) {
 
 // ========== 運動：週間集計・効果評価 ==========
 function parseKcalRange(kcalStr) {
-  // &#xFF5E; や ? や ~ を区切り文字として扱い、カンマ付き数字を正しくパース
-  const normalized = kcalStr.replace(/&#xFF5E;|&#x301C;|?|~/g, '-').replace(/,/g, '');
+  // &#xFF5E; や 〜 や ~ を区切り文字として扱い、カンマ付き数字を正しくパース
+  const normalized = kcalStr.replace(/&#xFF5E;|&#x301C;|〜|~/g, '-').replace(/,/g, '');
   const nums = (normalized.match(/\d+/g) || []).map(Number);
   if(nums.length === 0) return [0, 0];
   if(nums.length === 1) return [nums[0], nums[0]];
@@ -1769,7 +1766,7 @@ function renderReviewTab() {
     chip('筋トレ', stats.strengthCount),
     chip('複合', stats.comboCount),
     chip('休養系', stats.restCount),
-    chip('? 未実施', stats.noneCount),
+    chip('— 未実施', stats.noneCount),
   ].filter(Boolean).join(' ');
   document.getElementById('review-exercise-chips').innerHTML = chips || '<span style="font-size:12px;color:var(--text3)">記録がありません</span>';
 
