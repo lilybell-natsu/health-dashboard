@@ -74,25 +74,15 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 /* セクション */
 .section { padding: 0 16px 16px; }
 .section-title { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-.section-title-icon { display: flex; align-items: center; gap: 6px; }
-/* ユーティリティ */
-.flex-row   { display: flex; align-items: center; gap: 6px; }
-.text-blue  { color: var(--blue); }
-.text-amber { color: var(--amber); }
-.text-green { color: var(--green); }
-.hidden     { display: none; }
-
-/* 共通リストカード基底 */
-.list-card { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; }
 
 /* 食事カード */
-.meal-card { justify-content: space-between; }
+.meal-card { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 .meal-name { font-size: 14px; font-weight: 500; }
 .meal-detail { font-size: 12px; color: var(--text2); margin-top: 2px; }
 .meal-kcal { font-size: 15px; font-weight: 600; color: var(--accent); }
 
 /* サプリカード */
-.supple-card { justify-content: space-between; }
+.supple-card { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
 .supple-name { font-size: 14px; font-weight: 500; }
 .supple-time { font-size: 12px; color: var(--text2); margin-top: 2px; }
 .toggle { width: 44px; height: 24px; background: #e0e0e0; border-radius: 12px; position: relative; cursor: pointer; transition: background 0.2s; border: none; }
@@ -101,7 +91,7 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 .toggle.on::after { left: 23px; }
 
 /* ToDoリスト */
-.todo-item { gap: 12px; cursor: pointer; }
+.todo-item { background: var(--card); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
 .todo-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
 .todo-check.checked { background: var(--accent); border-color: var(--accent); color: #fff; }
 .todo-text { font-size: 14px; }
@@ -143,8 +133,8 @@ body { font-family: -apple-system, 'Noto Sans JP', sans-serif; background: var(-
 .calendar-grid { margin: 0 16px 4px; background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
 .calendar-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 1px solid var(--border); }
 .calendar-dow { text-align: center; font-size: 10px; color: var(--text3); padding: 6px 0; }
-.calendar-dow:nth-child(6) { color: var(--blue); }  /* 土 */
-.calendar-dow:nth-child(7) { color: var(--red); }   /* 日 */
+.calendar-dow:first-child { color: var(--red); }
+.calendar-dow:last-child { color: var(--blue); }
 .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); }
 .calendar-cell { text-align: center; padding: 6px 2px; font-size: 12px; color: var(--text2); position: relative; min-height: 36px; }
 .calendar-cell.today .cal-num { background: var(--accent); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
@@ -321,7 +311,7 @@ canvas { width: 100% !important; }
     <div class="progress-section">
       <div class="progress-card">
         <div class="progress-header">
-          <span class="progress-title flex-row" data-icon="weight_progress">減量進捗</span>
+          <span class="progress-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:18px;height:18px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><rect x="18" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><rect x="76" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><path d="M58 64h12" stroke="#3E6B73" stroke-width="4"/><path d="M68 58l6 6-6 6" fill="none" stroke="#3E6B73" stroke-width="4"/></svg></span> 減量進捗</span>
           <span class="progress-pct" id="weight-pct">0%</span>
         </div>
         <div class="progress-bar">
@@ -346,14 +336,14 @@ canvas { width: 100% !important; }
 
     <div class="section">
       <div class="section-title">サプリメント</div>
-      <div class="list-card supple-card">
+      <div class="supple-card">
         <div>
           <div class="supple-name">DHC ビタミンD</div>
           <div class="supple-time">朝食と一緒に 1粒</div>
         </div>
         <button class="toggle" onclick="this.classList.toggle('on')" id="supple1"></button>
       </div>
-      <div class="list-card supple-card">
+      <div class="supple-card">
         <div>
           <div class="supple-name">DHC 鉄＋葉酸＋亜鉛グミ</div>
           <div class="supple-time">昼食後 2粒</div>
@@ -371,50 +361,50 @@ canvas { width: 100% !important; }
     </div>
 
     <div class="section">
-      <div class="section-title section-title-icon" data-icon="lunch">食事</div>
-      <div class="list-card todo-item" data-todo-id="meal-breakfast" onclick="toggleTodo(this)">
+      <div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><rect x="30" y="50" width="68" height="28" rx="4" fill="#F4B942" stroke="#3E6B73" stroke-width="4"/><path d="M22 42v44M106 42v44" stroke="#3E6B73" stroke-width="4"/></svg></span> 食事</div>
+      <div class="todo-item" data-todo-id="meal-breakfast" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">朝食を食べる</div><div class="todo-category text-blue">食事</div></div>
+        <div><div class="todo-text">朝食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
-      <div class="list-card todo-item" data-todo-id="meal-lunch" onclick="toggleTodo(this)">
+      <div class="todo-item" data-todo-id="meal-lunch" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">昼食を食べる</div><div class="todo-category text-blue">食事</div></div>
+        <div><div class="todo-text">昼食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
-      <div class="list-card todo-item" data-todo-id="meal-snack" onclick="toggleTodo(this)">
+      <div class="todo-item" data-todo-id="meal-snack" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">間食を食べる</div><div class="todo-category text-blue">食事</div></div>
+        <div><div class="todo-text">間食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
-      <div class="list-card todo-item" data-todo-id="meal-dinner" onclick="toggleTodo(this)">
+      <div class="todo-item" data-todo-id="meal-dinner" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">夕食を食べる</div><div class="todo-category text-blue">食事</div></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title section-title-icon" data-icon="neutral">サプリ</div>
-      <div class="list-card todo-item" data-todo-id="supple-vitd" onclick="toggleTodo(this)">
-        <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">DHC ビタミンD（朝食と一緒）</div><div class="todo-category text-green">サプリ</div></div>
-      </div>
-      <div class="list-card todo-item" data-todo-id="supple-iron" onclick="toggleTodo(this)">
-        <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">DHC 鉄＋葉酸＋亜鉛グミ（昼食後）</div><div class="todo-category text-green">サプリ</div></div>
+        <div><div class="todo-text">夕食を食べる</div><div class="todo-category" style="color:var(--blue)">食事</div></div>
       </div>
     </div>
 
     <div class="section">
-      <div class="section-title section-title-icon" data-icon="exercise">運動・健康</div>
-      <div class="list-card todo-item" data-todo-id="exercise-today" onclick="toggleTodo(this)">
+      <div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE" stroke="#3E6B73" stroke-width="4" stroke-dasharray="8 8"/><path d="M48 64h32" stroke="#3E6B73" stroke-width="6"/></svg></span> サプリ</div>
+      <div class="todo-item" data-todo-id="supple-vitd" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">今日の運動を実施する</div><div class="todo-category text-amber">運動</div></div>
+        <div><div class="todo-text">DHC ビタミンD（朝食と一緒）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
       </div>
-      <div class="list-card todo-item" data-todo-id="health-water" onclick="toggleTodo(this)">
+      <div class="todo-item" data-todo-id="supple-iron" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">水分補給（水1L・麦茶1L）</div><div class="todo-category text-amber">健康</div></div>
+        <div><div class="todo-text">DHC 鉄＋葉酸＋亜鉛グミ（昼食後）</div><div class="todo-category" style="color:var(--green)">サプリ</div></div>
       </div>
-      <div class="list-card todo-item" data-todo-id="health-weight" onclick="toggleTodo(this)">
+    </div>
+
+    <div class="section">
+      <div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><circle cx="64" cy="64" r="24" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><path d="M64 40v24l16 12" fill="none" stroke="#3E6B73" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 92c10-12 22-18 36-18s26 6 36 18" fill="none" stroke="#F4B942" stroke-width="6" stroke-linecap="round"/></svg></span> 運動・健康</div>
+      <div class="todo-item" data-todo-id="exercise-today" onclick="toggleTodo(this)">
         <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div><div class="todo-text">体重を記録する</div><div class="todo-category text-amber">健康</div></div>
+        <div><div class="todo-text">今日の運動を実施する</div><div class="todo-category" style="color:var(--amber)">運動</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="health-water" onclick="toggleTodo(this)">
+        <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="todo-text">水分補給（水1L・麦茶1L）</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
+      </div>
+      <div class="todo-item" data-todo-id="health-weight" onclick="toggleTodo(this)">
+        <div class="todo-check"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="todo-text">体重を記録する</div><div class="todo-category" style="color:var(--amber)">健康</div></div>
       </div>
     </div>
   </div>
@@ -448,10 +438,10 @@ canvas { width: 100% !important; }
       </div>
       <div class="calendar-grid">
         <div class="calendar-dow-row">
-          <div class="calendar-dow">月</div><div class="calendar-dow">火</div>
-          <div class="calendar-dow">水</div><div class="calendar-dow">木</div>
-          <div class="calendar-dow">金</div><div class="calendar-dow">土</div>
-          <div class="calendar-dow">日</div>
+          <div class="calendar-dow">日</div><div class="calendar-dow">月</div>
+          <div class="calendar-dow">火</div><div class="calendar-dow">水</div>
+          <div class="calendar-dow">木</div><div class="calendar-dow">金</div>
+          <div class="calendar-dow">土</div>
         </div>
         <div class="calendar-days" id="calendar-days"></div>
       </div>
@@ -468,7 +458,7 @@ canvas { width: 100% !important; }
     <div id="week-summary"></div>
 
     <div class="section">
-      <div class="section-title section-title-icon" data-icon="heart_rate">心拍ゾーン（最大心拍数 193bpm）</div>
+      <div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><path d="M64 92 C58 86,44 76,36 64 C28 52,34 38,48 38 C56 38,61 42,64 48 C67 42,72 38,80 38 C94 38,100 52,92 64 C84 76,70 86,64 92Z" fill="#F4B942" stroke="#3E6B73" stroke-width="4"/><path d="M34 64 H48 L56 52 L66 76 L74 60 H94" fill="none" stroke="#3E6B73" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span> 心拍ゾーン（最大心拍数 193bpm）</div>
     </div>
     <div class="zone-table">
       <div class="zone-row"><span class="zone-name">LSD（軽め）</span><span class="zone-bpm">116&#xFF5E;135 bpm</span></div>
@@ -560,11 +550,11 @@ canvas { width: 100% !important; }
       <button class="week-nav-btn" id="week-nav-next" onclick="changeReviewWeek(1)">次の週 &raquo;</button>
     </div>
 
-    <div class="section"><div class="section-title section-title-icon" data-icon="exercise">運動サマリー</div></div>
+    <div class="section"><div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><circle cx="64" cy="64" r="24" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><path d="M64 40v24l16 12" fill="none" stroke="#3E6B73" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 92c10-12 22-18 36-18s26 6 36 18" fill="none" stroke="#F4B942" stroke-width="6" stroke-linecap="round"/></svg></span> 運動サマリー</div></div>
     <div class="metrics" id="review-exercise-metrics"></div>
     <div id="review-exercise-chips" style="padding:0 16px 16px"></div>
 
-    <div class="section"><div class="section-title section-title-icon" data-icon="weight_progress">体重の変化</div></div>
+    <div class="section"><div class="section-title" style="display:flex;align-items:center;gap:6px"><span style="display:inline-flex;width:20px;height:20px;flex-shrink:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><circle cx="64" cy="64" r="60" fill="#F5F3EE"/><rect x="18" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><rect x="76" y="52" width="34" height="24" rx="6" fill="#FFFFFF" stroke="#3E6B73" stroke-width="4"/><path d="M58 64h12" stroke="#3E6B73" stroke-width="4"/><path d="M68 58l6 6-6 6" fill="none" stroke="#3E6B73" stroke-width="4"/></svg></span> 体重の変化</div></div>
     <div class="goal-progress-card" id="review-weight-summary"></div>
 
     <div class="section"><div class="section-title">  今週の総括</div></div>
@@ -1358,7 +1348,7 @@ function renderTodayMeals() {
     const modBadge = m.overridden ? ' <span class="meal-badge-mod">変更</span>' : '';
     const opacity  = checked ? '' : 'opacity:0.4;';
     const borderL  = checked ? (m.overridden ? 'border-left:3px solid var(--amber);' : 'border-left:3px solid var(--accent);') : '';
-    return `<div class="list-card meal-card" style="${opacity}${borderL}">
+    return `<div class="meal-card" style="${opacity}${borderL}">
       <div>
         <div class="meal-name" style="display:flex;align-items:center;gap:6px">${icon(m.icon, '20px')} ${m.label}${modBadge}${checked ? '' : ' <span style="font-size:11px;color:var(--text3)">（未）</span>'}</div>
         <div class="meal-detail">${label}</div>
@@ -1426,7 +1416,7 @@ function renderTodayExercise() {
   if(workoutId === 'none') {
     container.innerHTML = `<div class="today-exercise-card no-record">
       <div>
-        <div class="today-exercise-name flex-row">${icon('exercise','20px')} 運動なし</div>
+        <div class="today-exercise-name" style="display:flex;align-items:center;gap:6px">${icon('exercise','20px')} 運動なし</div>
         <div class="today-exercise-sub">この日は運動を行いませんでした</div>
       </div>
       <div class="today-exercise-kcal">0 kcal</div>
@@ -1437,7 +1427,7 @@ function renderTodayExercise() {
   const w = WORKOUTS[workoutId];
   container.innerHTML = `<div class="today-exercise-card has-record">
     <div>
-      <div class="today-exercise-name flex-row">${icon('exercise','20px')} ${w.label}</div>
+      <div class="today-exercise-name" style="display:flex;align-items:center;gap:6px">${icon('exercise','20px')} ${w.label}</div>
       <div class="today-exercise-sub">${w.sub}</div>
     </div>
     <div class="today-exercise-kcal">${w.kcal}</div>
@@ -1473,7 +1463,7 @@ function renderExerciseCalendar() {
   document.getElementById('calendar-month-label').textContent =
     `${year}年${month + 1}月`;
 
-  const firstDow    = (new Date(year, month, 1).getDay() + 6) % 7; // 月=0 … 日=6
+  const firstDow    = new Date(year, month, 1).getDay(); // 0=日
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   let html = '';
@@ -1984,12 +1974,6 @@ function renderWeightChart(data) {
 
 // ========== 初期化 ==========
 window.addEventListener('load', function() {
-  // section-titleアイコン初期化
-  document.querySelectorAll('[data-icon]').forEach(el => {
-    const iconName = el.getAttribute('data-icon');
-    el.insertAdjacentHTML('afterbegin', icon(iconName, '20px'));
-  });
-
   // 日付設定
   const now = new Date();
   document.getElementById('today-date').textContent = formatDate(now);
