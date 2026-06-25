@@ -1634,7 +1634,7 @@ function chooseWorkout(id) {
 // ========== 運動：週間集計・効果評価 ==========
 function parseKcalRange(kcalStr) {
   // &#xFF5E; や ? や ~ を区切り文字として扱い、カンマ付き数字を正しくパース
-  const normalized = kcalStr.replace(/\uFF5E|\u301C|?|~/g, '-').replace(/,/g, '');
+  const normalized = kcalStr.split('\uFF5E').join('-').split('\u301C').join('-').split('~').join('-').replace(/,/g, '');
   const nums = (normalized.match(/\d+/g) || []).map(Number);
   if(nums.length === 0) return [0, 0];
   if(nums.length === 1) return [nums[0], nums[0]];
